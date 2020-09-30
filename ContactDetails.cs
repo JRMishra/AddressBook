@@ -37,5 +37,11 @@ namespace AddressBook
         public string City { get => _address.City; set => _address.City = value; }
         public string State { get => _address.State; set => _address.State = value; }
         public string Zip { get => _address.Zip; set => _address.Zip = value; }
+
+        public string Display()
+        {
+            return "\nName : " + this.FirstName + " " + this.LastName + "\nAddress : " + this.City + "," + this.State + "," + this.Zip +
+                "\nPhone : " + this.PhoneNumber + "\nEmail Id : " + this.Email;
+        }
     }
 }
