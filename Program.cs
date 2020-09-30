@@ -12,26 +12,34 @@ namespace AddressBook
             Console.WriteLine("========================");
 
             Dictionary<string, ContactDetails> addressBook = new Dictionary<string, ContactDetails>();
-
-            Console.WriteLine("Enter\n" +
+            bool exit = false;
+            int choice;
+            while (!exit)
+            {
+                Console.WriteLine("Enter\n" +
                 "1 : Add Contact Details To Address Book\n" +
                 "2 : Edit a Contact Detail\n" +
                 "3 : Delete a Contact Detail\n" +
                 "4 : Exit");
-            int choice = Int32.Parse(Console.ReadLine());
-
-            switch(choice)
-            {
-                case 1:
-                    AddContactDetails(ref addressBook);
-                    break;
-                case 2:
-                case 3:
-                case 4:
-                default:
-                    break;
+            choice = Int32.Parse(Console.ReadLine());
+            
+                switch (choice)
+                {
+                    case 1:
+                        AddContactDetails(ref addressBook);
+                        break;
+                    case 2:
+                        EditContactDetails(ref addressBook);
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        exit = true;
+                        break;
+                    default:
+                        break;
+                }
             }
-
             return;
         }
 
@@ -55,10 +63,66 @@ namespace AddressBook
             contact.PhoneNumber = Console.ReadLine();
             Console.Write("Email : ");
             contact.Email = Console.ReadLine();
+            Console.WriteLine();
 
             addressBook.Add(contact.FirstName, contact);
 
             return;
+        }
+
+        static void EditContactDetails(ref Dictionary<string, ContactDetails> addressBook)
+        {
+            string name;
+            Console.WriteLine("Enter First Name whose details need to be edited ");
+            name = Console.ReadLine();
+
+            bool notCompleted = true;
+            int choice;
+
+            Console.WriteLine("Enter\n" +
+                    "1 : Edit City\n" +
+                    "2 : Edit State\n+" +
+                    "3 : Edit Zip\n" +
+                    "4 : Edit Phone Number\n" +
+                    "5 : Edit Email ID\n" +
+                    "0 : Edit Completed");
+
+            while (notCompleted)
+            {
+                choice = Int32.Parse(Console.ReadLine());
+                switch(choice)
+                {
+                    case 1:
+                        Console.Write("Edit Updated City :");
+                        addressBook[name].City = Console.ReadLine();
+                        break;
+                    case 2:
+                        Console.Write("Edit Updated State :");
+                        addressBook[name].State = Console.ReadLine();
+                        break;
+                    case 3:
+                        Console.Write("Edit Updated Zip :");
+                        addressBook[name].Zip = Console.ReadLine();
+                        break;
+                    case 4:
+                        Console.Write("Edit Updated Phone Number :");
+                        addressBook[name].PhoneNumber = Console.ReadLine();
+                        break;
+                    case 5:
+                        Console.Write("Edit Updated Email Id :");
+                        addressBook[name].State = Console.ReadLine();
+                        break;
+                    case 0:
+                        notCompleted = false;
+                        break;
+                    default:
+                        Console.WriteLine("Wrong Choice\nChoose Again");
+                        break;
+                }
+
+                Console.WriteLine("If there is anything else to edit, enter respective number\n" +
+                    "else enter 0 to exit");
+            }
         }
     }
 }
