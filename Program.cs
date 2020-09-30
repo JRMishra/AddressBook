@@ -32,6 +32,7 @@ namespace AddressBook
                         EditContactDetails(ref addressBook);
                         break;
                     case 3:
+                        DeleteContactDetails(ref addressBook);
                         break;
                     case 4:
                         exit = true;
@@ -123,6 +124,22 @@ namespace AddressBook
                 Console.WriteLine("If there is anything else to edit, enter respective number\n" +
                     "else enter 0 to exit");
             }
+        }
+
+        static void DeleteContactDetails(ref Dictionary<string, ContactDetails> addressBook)
+        {
+            string name;
+            Console.WriteLine("Enter First Name whose details need to be deleted ");
+            name = Console.ReadLine();
+
+            if (addressBook.ContainsKey(name))
+            {
+                addressBook.Remove(name);
+                Console.WriteLine("Details of " + name + " deleted successfully");
+            }  
+            else
+                Console.WriteLine("Details of " + name + " is not present");
+            return;
         }
     }
 }
