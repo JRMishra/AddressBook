@@ -1,0 +1,13 @@
+C:\Users\user\Desktop\Training-CapG\AddressBook\bin\Debug\netcoreapp3.1\AddressBook.exe
+C:\Users\user\Desktop\Training-CapG\AddressBook\bin\Debug\netcoreapp3.1\AddressBook.deps.json
+C:\Users\user\Desktop\Training-CapG\AddressBook\bin\Debug\netcoreapp3.1\AddressBook.runtimeconfig.json
+C:\Users\user\Desktop\Training-CapG\AddressBook\bin\Debug\netcoreapp3.1\AddressBook.runtimeconfig.dev.json
+C:\Users\user\Desktop\Training-CapG\AddressBook\bin\Debug\netcoreapp3.1\AddressBook.dll
+C:\Users\user\Desktop\Training-CapG\AddressBook\bin\Debug\netcoreapp3.1\AddressBook.pdb
+C:\Users\user\Desktop\Training-CapG\AddressBook\obj\Debug\netcoreapp3.1\AddressBook.csprojAssemblyReference.cache
+C:\Users\user\Desktop\Training-CapG\AddressBook\obj\Debug\netcoreapp3.1\AddressBook.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\Training-CapG\AddressBook\obj\Debug\netcoreapp3.1\AddressBook.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\Training-CapG\AddressBook\obj\Debug\netcoreapp3.1\AddressBook.AssemblyInfo.cs
+C:\Users\user\Desktop\Training-CapG\AddressBook\obj\Debug\netcoreapp3.1\AddressBook.dll
+C:\Users\user\Desktop\Training-CapG\AddressBook\obj\Debug\netcoreapp3.1\AddressBook.pdb
+C:\Users\user\Desktop\Training-CapG\AddressBook\obj\Debug\netcoreapp3.1\AddressBook.genruntimeconfig.cache
