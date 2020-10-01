@@ -56,7 +56,7 @@ namespace AddressBook
 
             Console.WriteLine("Enter\n" +
                     "1 : Edit City\n" +
-                    "2 : Edit State\n+" +
+                    "2 : Edit State\n" +
                     "3 : Edit Zip\n" +
                     "4 : Edit Phone Number\n" +
                     "5 : Edit Email ID\n" +
@@ -85,7 +85,7 @@ namespace AddressBook
                         break;
                     case 5:
                         Console.Write("Edit Updated Email Id :");
-                        _addressBook[name].State = Console.ReadLine();
+                        _addressBook[name].Email = Console.ReadLine();
                         break;
                     case 0:
                         notCompleted = false;
