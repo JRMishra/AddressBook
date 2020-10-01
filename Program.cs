@@ -27,7 +27,11 @@ namespace AddressBook
                 switch (choice)
                 {
                     case 1:
-                        addressBook.AddContactDetails();
+                        int numDetails;
+                        Console.Write("Enter number of Contact Details you want to save : ");
+                        numDetails = Int32.Parse(Console.ReadLine());
+                        for(int i=1; i<=numDetails; i++)
+                            addressBook.AddContactDetails();
                         break;
                     case 2:
                         addressBook.EditContactDetails();

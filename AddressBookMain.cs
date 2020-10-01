@@ -6,14 +6,14 @@ namespace AddressBook
 {
     class AddressBookMain
     {
-        Dictionary<string, ContactDetails> _addressBook; 
+        Dictionary<string, ContactDetails> _addressBook;
 
         public AddressBookMain()
         {
             this._addressBook = new Dictionary<string, ContactDetails>();
         }
 
-        public AddressBookMain(Dictionary<string,ContactDetails> contactAddress)
+        public AddressBookMain(Dictionary<string, ContactDetails> contactAddress)
         {
             this._addressBook = contactAddress;
         }
@@ -22,7 +22,7 @@ namespace AddressBook
         {
             ContactDetails contact = new ContactDetails();
 
-            Console.WriteLine("Enter\n");
+            Console.WriteLine("Enter");
 
             Console.Write("First Name : ");
             contact.FirstName = Console.ReadLine();
@@ -41,7 +41,7 @@ namespace AddressBook
             Console.WriteLine();
 
             _addressBook.Add(contact.FirstName, contact);
-
+            Console.WriteLine("Details got saved successfully");
             return;
         }
 
@@ -50,53 +50,59 @@ namespace AddressBook
             string name;
             Console.WriteLine("Enter First Name whose details need to be edited ");
             name = Console.ReadLine();
-
-            bool notCompleted = true;
-            int choice;
-
-            Console.WriteLine("Enter\n" +
-                    "1 : Edit City\n" +
-                    "2 : Edit State\n" +
-                    "3 : Edit Zip\n" +
-                    "4 : Edit Phone Number\n" +
-                    "5 : Edit Email ID\n" +
-                    "0 : Edit Completed");
-
-            while (notCompleted)
+            if (_addressBook.ContainsKey(name))
             {
-                choice = Int32.Parse(Console.ReadLine());
-                switch(choice)
-                {
-                    case 1:
-                        Console.Write("Edit Updated City :");
-                        _addressBook[name].City = Console.ReadLine();
-                        break;
-                    case 2:
-                        Console.Write("Edit Updated State :");
-                        _addressBook[name].State = Console.ReadLine();
-                        break;
-                    case 3:
-                        Console.Write("Edit Updated Zip :");
-                        _addressBook[name].Zip = Console.ReadLine();
-                        break;
-                    case 4:
-                        Console.Write("Edit Updated Phone Number :");
-                        _addressBook[name].PhoneNumber = Console.ReadLine();
-                        break;
-                    case 5:
-                        Console.Write("Edit Updated Email Id :");
-                        _addressBook[name].Email = Console.ReadLine();
-                        break;
-                    case 0:
-                        notCompleted = false;
-                        break;
-                    default:
-                        Console.WriteLine("Wrong Choice\nChoose Again");
-                        break;
-                }
+                bool notCompleted = true;
+                int choice;
 
-                Console.WriteLine("\nIf there is anything else to edit, enter respective number\n" +
-                    "else enter 0 to exit");
+                Console.WriteLine("Enter\n" +
+                        "1 : Edit City\n" +
+                        "2 : Edit State\n" +
+                        "3 : Edit Zip\n" +
+                        "4 : Edit Phone Number\n" +
+                        "5 : Edit Email ID\n" +
+                        "0 : Edit Completed");
+
+                while (notCompleted)
+                {
+                    choice = Int32.Parse(Console.ReadLine());
+                    switch (choice)
+                    {
+                        case 1:
+                            Console.Write("Edit Updated City :");
+                            _addressBook[name].City = Console.ReadLine();
+                            break;
+                        case 2:
+                            Console.Write("Edit Updated State :");
+                            _addressBook[name].State = Console.ReadLine();
+                            break;
+                        case 3:
+                            Console.Write("Edit Updated Zip :");
+                            _addressBook[name].Zip = Console.ReadLine();
+                            break;
+                        case 4:
+                            Console.Write("Edit Updated Phone Number :");
+                            _addressBook[name].PhoneNumber = Console.ReadLine();
+                            break;
+                        case 5:
+                            Console.Write("Edit Updated Email Id :");
+                            _addressBook[name].Email = Console.ReadLine();
+                            break;
+                        case 0:
+                            notCompleted = false;
+                            break;
+                        default:
+                            Console.WriteLine("Wrong Choice\nChoose Again");
+                            break;
+                    }
+
+                    Console.WriteLine("\nIf there is anything else to edit, enter respective number\n" +
+                        "else enter 0 to exit");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Details of " + name + " isn't present in address book\n");
             }
         }
 
@@ -110,16 +116,16 @@ namespace AddressBook
             {
                 _addressBook.Remove(name);
                 Console.WriteLine("Details of " + name + " deleted successfully");
-            }  
+            }
             else
                 Console.WriteLine("Details of " + name + " is not present");
             return;
         }
-        
+
         public void DisplayAllContacts()
         {
             Console.WriteLine("All Contacts are :");
-            foreach(var item in _addressBook)
+            foreach (var item in _addressBook)
             {
                 Console.WriteLine(item.Value.Display());
             }
