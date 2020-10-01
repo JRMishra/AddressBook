@@ -6,14 +6,14 @@ namespace AddressBook
 {
     class AddressBookMain
     {
-        Dictionary<string, ContactDetails> _addressBook;
+        Dictionary<string, ContactDetails> _addressBook; 
 
         public AddressBookMain()
         {
             this._addressBook = new Dictionary<string, ContactDetails>();
         }
 
-        public AddressBookMain(Dictionary<string, ContactDetails> contactAddress)
+        public AddressBookMain(Dictionary<string,ContactDetails> contactAddress)
         {
             this._addressBook = contactAddress;
         }
@@ -22,7 +22,7 @@ namespace AddressBook
         {
             ContactDetails contact = new ContactDetails();
 
-            Console.WriteLine("Enter");
+            Console.WriteLine("Enter\n");
 
             Console.Write("First Name : ");
             contact.FirstName = Console.ReadLine();
@@ -41,7 +41,7 @@ namespace AddressBook
             Console.WriteLine();
 
             _addressBook.Add(contact.FirstName, contact);
-            Console.WriteLine("Details got saved successfully");
+
             return;
         }
 
@@ -50,8 +50,11 @@ namespace AddressBook
             string name;
             Console.WriteLine("Enter First Name whose details need to be edited ");
             name = Console.ReadLine();
-            if (_addressBook.ContainsKey(name))
+
+            if(_addressBook.ContainsKey(name))
             {
+
+            
                 bool notCompleted = true;
                 int choice;
 
@@ -86,7 +89,7 @@ namespace AddressBook
                             break;
                         case 5:
                             Console.Write("Edit Updated Email Id :");
-                            _addressBook[name].Email = Console.ReadLine();
+                            _addressBook[name].State = Console.ReadLine();
                             break;
                         case 0:
                             notCompleted = false;
@@ -95,14 +98,14 @@ namespace AddressBook
                             Console.WriteLine("Wrong Choice\nChoose Again");
                             break;
                     }
-
-                    Console.WriteLine("\nIf there is anything else to edit, enter respective number\n" +
-                        "else enter 0 to exit");
+                    if (choice != 0)
+                        Console.WriteLine("\nIf there is anything else to edit, enter respective number\n" + "else enter 0 to exit");
                 }
+                
             }
             else
             {
-                Console.WriteLine("Details of " + name + " isn't present in address book\n");
+                Console.WriteLine("Details of " + name + " is not present");
             }
         }
 
@@ -116,16 +119,16 @@ namespace AddressBook
             {
                 _addressBook.Remove(name);
                 Console.WriteLine("Details of " + name + " deleted successfully");
-            }
+            }  
             else
                 Console.WriteLine("Details of " + name + " is not present");
             return;
         }
-
+        
         public void DisplayAllContacts()
         {
             Console.WriteLine("All Contacts are :");
-            foreach (var item in _addressBook)
+            foreach(var item in _addressBook)
             {
                 Console.WriteLine(item.Value.Display());
             }
