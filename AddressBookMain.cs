@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
 
@@ -6,7 +7,8 @@ namespace AddressBook
 {
     class AddressBookMain
     {
-        Dictionary<string, ContactDetails> _addressBook; 
+        Dictionary<string, ContactDetails> _addressBook;
+        LogDetails logDetails = new LogDetails();
 
         public AddressBookMain()
         {
@@ -41,7 +43,8 @@ namespace AddressBook
             Console.WriteLine();
 
             _addressBook.Add(contact.FirstName, contact);
-
+            Console.WriteLine("Processing...\n");
+            Console.WriteLine("Details saved successfully");
             return;
         }
 
@@ -68,7 +71,16 @@ namespace AddressBook
 
                 while (notCompleted)
                 {
-                    choice = Int32.Parse(Console.ReadLine());
+                    try
+                    {
+                       choice = Int32.Parse(Console.ReadLine());
+                    }
+                    catch(Exception e)
+                    {
+                        logDetails.LogDebug("Class : AddressBookMain , Method : EditContact, Field : choice");
+                        logDetails.LogError(e.Message + " It should be a integer");
+                        choice = 0;
+                    }
                     switch (choice)
                     {
                         case 1:

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog.Fluent;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,12 +7,13 @@ namespace AddressBook
 {
     class AddressBooks
     {
+        LogDetails logDetails = new LogDetails();
         string _name;
-        Dictionary<string, AddressBookMain> _multContactDetails =  new Dictionary<string, AddressBookMain>();
+        Dictionary<string, AddressBookMain> _multContactDetails = new Dictionary<string, AddressBookMain>();
 
         public AddressBooks()
         {
-            this._name = "General";    
+            this._name = "General";
         }
 
         public AddressBooks(string name)
@@ -24,10 +26,19 @@ namespace AddressBook
         public void AddNewAddressBook()
         {
             AddressBookMain addressBook = new AddressBookMain();
-
             int numDetails;
             Console.Write("Enter number of Contact Details you want to save : ");
-            numDetails = Int32.Parse(Console.ReadLine());
+            try
+            {
+                numDetails = Int32.Parse(Console.ReadLine());
+            }
+            catch(Exception e)
+            {
+                logDetails.LogDebug("Class : AddressBooks , Method : AddNewAddressBook, Field : numDetails");
+                logDetails.LogError(e.Message+" It should be a integer");
+                numDetails = 0;
+            }
+
             for (int i = 1; i <= numDetails; i++)
                 addressBook.AddContactDetails();
 

@@ -11,6 +11,7 @@ namespace AddressBook
             Console.WriteLine("Welcome to Address Book");
             Console.WriteLine("========================");
 
+            LogDetails logDetails = new LogDetails();
             AddressBooks addressBooksCollection = new AddressBooks();
             addressBooksCollection.Name = "General";
 
@@ -24,9 +25,17 @@ namespace AddressBook
                 "2 : To use current address books ( " + addressBooksCollection.Name + " )\n" +
                 "3 : Switch Address Book\n" +
                 "0 : Exit");
-
-                int userChoice = Int32.Parse(Console.ReadLine());
-
+                int userChoice;
+                try
+                {
+                    userChoice = Int32.Parse(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    logDetails.LogDebug("Class : Program , Method : Main, Field : userChoice");
+                    logDetails.LogError(e.Message + " It should be a integer");
+                    userChoice = 0;
+                }
                 switch (userChoice)
                 {
                     case 1:
@@ -59,9 +68,17 @@ namespace AddressBook
                     "1 : Add Contact Details to " + addressBooksCollection.Name + " Address Book\n" +
                     "2 : Edit a Contact Detail\n" +
                     "3 : Delete a Contact Detail\n" +
-                    "4 : Exit");
-                    choice = Int32.Parse(Console.ReadLine());
-
+                    "0 : Exit");
+                    try
+                    {
+                        choice = Int32.Parse(Console.ReadLine());
+                    }
+                    catch(Exception e)
+                    {
+                        logDetails.LogDebug("Class : Program , Method : Main, Field : choice");
+                        logDetails.LogError(e.Message + " It should be a integer");
+                        choice = 0;
+                    }
                     switch (choice)
                     {
                         case 1:
@@ -73,7 +90,7 @@ namespace AddressBook
                         case 3:
                             addressBooksCollection.DeleteOneContactDetail();
                             break;
-                        case 4:
+                        case 0:
                             contContactPanel = false;
                             break;
                         default:
@@ -82,11 +99,11 @@ namespace AddressBook
 
                 }
 
-                
+
 
             } while (contAddressBook);
-            
- 
+
+
             return;
         }
     }

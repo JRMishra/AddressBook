@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "6K4nwKAwVV3jNBWCWxkzj+1pFPv9p3XxZpJzSigQw2D0mjZjmaEjC5uec09thdYu41Gghc2HAEPNAIC72jZ9CA==",
+  "dgSpecHash": "jjkVoGucFe6gCTYKp7DpJiaAxTtljNzU+HaKvvcIg0F68xevSCKPDjVPC/+lxwqR+7nyfUoXVscOjIUIgzdEWQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\user\\Desktop\\Training-CapG\\AddressBook\\AddressBook.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\user\\.nuget\\packages\\nlog\\4.7.5\\nlog.4.7.5.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\nlog.config\\4.7.5\\nlog.config.4.7.5.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\nlog.schema\\4.7.5\\nlog.schema.4.7.5.nupkg.sha512"
+  ],
   "logs": []
 }
