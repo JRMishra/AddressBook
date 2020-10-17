@@ -151,5 +151,23 @@ namespace AddressBook
                 Console.WriteLine(item.Value.Display());
             }
         }
+
+        public void DisplayContactByState(string state)
+        {
+            foreach (var item in _addressBook)
+            {
+                if(item.Value.State == state)
+                    Console.WriteLine(item.Value.Display());
+            }
+        }
+
+        public void DisplayContactByCity(string city)
+        {
+            foreach (var item in _addressBook)
+            {
+                if(item.Value.City == city)
+                    Console.WriteLine(item.Value.Display());
+            }
+        }
     }
 }

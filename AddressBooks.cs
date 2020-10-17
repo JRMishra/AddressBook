@@ -9,7 +9,7 @@ namespace AddressBook
     {
         LogDetails logDetails = new LogDetails();
         string _name;
-        Dictionary<string, AddressBookMain> _multContactDetails = new Dictionary<string, AddressBookMain>();
+        Dictionary<string, AddressBookMain> _multiAddressBooks = new Dictionary<string, AddressBookMain>();
 
         public AddressBooks()
         {
@@ -25,30 +25,51 @@ namespace AddressBook
 
         public void AddNewContactInAddressBook()
         {
-            if (_multContactDetails.ContainsKey(this._name))
-                _multContactDetails[this._name].AddContactDetails();
+            if (_multiAddressBooks.ContainsKey(this._name))
+                _multiAddressBooks[this._name].AddContactDetails();
             else
             {
                 AddressBookMain addressBook = new AddressBookMain();
                 addressBook.AddContactDetails();
-                _multContactDetails.Add(this._name, addressBook);
+                _multiAddressBooks.Add(this._name, addressBook);
             }
            
         }
 
         public void EditDetailsInAddressBook()
         {
-            _multContactDetails[Name].EditContactDetails();
+            _multiAddressBooks[Name].EditContactDetails();
         }
 
         public void DeleteOneContactDetail()
         {
-            _multContactDetails[Name].DeleteContactDetails();
+            _multiAddressBooks[Name].DeleteContactDetails();
         }
 
         public void DisplayContactsInCurrentAddressBook()
         {
-            _multContactDetails[Name].DisplayAllContacts();
+            _multiAddressBooks[Name].DisplayAllContacts();
+        }
+
+        public void SearchByState(string state)
+        {
+            _multiAddressBooks[Name].DisplayContactByState(state);
+        }
+
+        public void SearchAllAddressBooksByState(string state)
+        {
+            foreach(var addressBook in _multiAddressBooks)
+            {
+                addressBook.Value.DisplayContactByState(state);
+            }
+        }
+
+        public void SearchAllAddressBooksByCity(string city)
+        {
+            foreach(var addressBook in _multiAddressBooks)
+            {
+                addressBook.Value.DisplayContactByCity(city);
+            }
         }
     }
 }

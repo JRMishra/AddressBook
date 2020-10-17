@@ -24,6 +24,7 @@ namespace AddressBook
                 "1 : To Add a new Address Book\n" +
                 "2 : To use current address books ( " + addressBooksCollection.Name + " )\n" +
                 "3 : Switch Address Book\n" +
+                "4 : Search across all address books\n" +
                 "0 : Exit");
                 int userChoice;
                 try
@@ -51,6 +52,27 @@ namespace AddressBook
                         Console.WriteLine("Enter Name of the Address Book you want to switch");
                         addressBooksCollection.Name = Console.ReadLine();
                         break;
+                    case 4:
+                        Console.WriteLine("Enter\n" +
+                            "1 : Search by State\n" +
+                            "2 : Search by City");
+                        switch(Int32.Parse(Console.ReadLine()))
+                        {
+                            case 1:
+                                Console.Write("Enter state name : ");
+                                string state = Console.ReadLine();
+                                addressBooksCollection.SearchAllAddressBooksByState(state);
+                                break;
+                            case 2:
+                                Console.Write("Enter city name : ");
+                                string city = Console.ReadLine();
+                                addressBooksCollection.SearchAllAddressBooksByCity(city);
+                                break;
+                            default:
+                                Console.WriteLine("Wrong Choice\n");
+                                break;
+                        }
+                        break;
                     case 0:
                         contAddressBook = false;
                         contContactPanel = false;
@@ -68,6 +90,7 @@ namespace AddressBook
                     "1 : Add Contact Details to " + addressBooksCollection.Name + " Address Book\n" +
                     "2 : Edit a Contact Detail\n" +
                     "3 : Delete a Contact Detail\n" +
+                    "4 : Search across a state\n" +
                     "0 : Exit");
                     try
                     {
@@ -90,6 +113,11 @@ namespace AddressBook
                         case 3:
                             addressBooksCollection.DeleteOneContactDetail();
                             break;
+                        case 4:
+                            Console.Write("Enter State Name to search : ");
+                            string stateToSearch = Console.ReadLine();
+                            addressBooksCollection.SearchByState(stateToSearch);
+                            break;
                         case 0:
                             contContactPanel = false;
                             break;
@@ -99,11 +127,9 @@ namespace AddressBook
 
                 }
 
-
-
             } while (contAddressBook);
 
-
+            
             return;
         }
     }
