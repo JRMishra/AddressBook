@@ -82,7 +82,7 @@ namespace AddressBook
                     switch (choice)
                     {
                         case 1:
-                            addressBooksCollection.AddNewAddressBook();
+                            addressBooksCollection.AddNewContactInAddressBook();
                             break;
                         case 2:
                             addressBooksCollection.EditDetailsInAddressBook();

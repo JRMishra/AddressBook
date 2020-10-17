@@ -28,6 +28,12 @@ namespace AddressBook
 
             Console.Write("First Name : ");
             contact.FirstName = Console.ReadLine();
+            if(_addressBook.ContainsKey(contact.FirstName))
+            {
+                Console.WriteLine("You can't enter duplicate contact details in the same address book");
+                return;
+            }   
+
             Console.Write("Last Name : ");
             contact.LastName = Console.ReadLine();
             Console.Write("City : ");

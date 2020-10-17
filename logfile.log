@@ -1,0 +1,6 @@
+2020-10-05 10:38:52.5371 DEBUG Class : Program , Method : Main, Field : userChoice
+2020-10-05 10:38:52.6287 ERROR Input string was not in a correct format. It should be a integer
+2020-10-05 10:39:01.5262 DEBUG Class : Program , Method : Main, Field : choice
+2020-10-05 10:39:01.6177 ERROR Input string was not in a correct format. It should be a integer
+2020-10-05 10:39:13.6846 DEBUG Class : AddressBooks , Method : AddNewAddressBook, Field : numDetails
+2020-10-05 10:39:13.6979 ERROR Input string was not in a correct format. It should be a integer

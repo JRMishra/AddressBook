@@ -23,26 +23,17 @@ namespace AddressBook
 
         public string Name { get => _name; set => _name = value; }
 
-        public void AddNewAddressBook()
+        public void AddNewContactInAddressBook()
         {
-            AddressBookMain addressBook = new AddressBookMain();
-            int numDetails;
-            Console.Write("Enter number of Contact Details you want to save : ");
-            try
+            if (_multContactDetails.ContainsKey(this._name))
+                _multContactDetails[this._name].AddContactDetails();
+            else
             {
-                numDetails = Int32.Parse(Console.ReadLine());
-            }
-            catch(Exception e)
-            {
-                logDetails.LogDebug("Class : AddressBooks , Method : AddNewAddressBook, Field : numDetails");
-                logDetails.LogError(e.Message+" It should be a integer");
-                numDetails = 0;
-            }
-
-            for (int i = 1; i <= numDetails; i++)
+                AddressBookMain addressBook = new AddressBookMain();
                 addressBook.AddContactDetails();
-
-            _multContactDetails.Add(this._name, addressBook);
+                _multContactDetails.Add(this._name, addressBook);
+            }
+           
         }
 
         public void EditDetailsInAddressBook()
