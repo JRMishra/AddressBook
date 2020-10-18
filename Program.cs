@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace AddressBook
@@ -14,7 +15,7 @@ namespace AddressBook
             LogDetails logDetails = new LogDetails();
             AddressBooks addressBooksCollection = new AddressBooks();
             addressBooksCollection.Name = "General";
-
+            
             bool contAddressBook = true; ;
             bool contContactPanel = true; ;
 
@@ -116,7 +117,7 @@ namespace AddressBook
                         case 4:
                             Console.Write("Enter State Name to search : ");
                             string stateToSearch = Console.ReadLine();
-                            addressBooksCollection.SearchByState(stateToSearch);
+                            addressBooksCollection.SearchCurrentAddressBookByState(stateToSearch);
                             break;
                         case 0:
                             contContactPanel = false;
@@ -129,7 +130,9 @@ namespace AddressBook
 
             } while (contAddressBook);
 
-            
+            addressBooksCollection.DisplayPersonNameByState();
+            addressBooksCollection.DisplayPersonNameByCity();
+
             return;
         }
     }

@@ -1,6 +1,7 @@
 ﻿using NLog;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.ExceptionServices;
 
 namespace AddressBook
@@ -8,6 +9,9 @@ namespace AddressBook
     class AddressBookMain
     {
         Dictionary<string, ContactDetails> _addressBook;
+        Dictionary<string, List<string>> _personByState = new Dictionary<string, List<string>>();
+        Dictionary<string, List<string>> _personByCity = new Dictionary<string, List<string>>();
+        
         LogDetails logDetails = new LogDetails();
 
         public AddressBookMain()
@@ -20,6 +24,10 @@ namespace AddressBook
             this._addressBook = contactAddress;
         }
 
+           //===================================================================//
+          //------------------------[ Public Methods ]-------------------------//
+         //--------------------------CRUD Operations--------------------------//
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
         public void AddContactDetails()
         {
             ContactDetails contact = new ContactDetails();
@@ -49,6 +57,9 @@ namespace AddressBook
             Console.WriteLine();
 
             _addressBook.Add(contact.FirstName, contact);
+            AddToStateDict(contact.State, contact.FirstName);
+            AddToCityDict(contact.City, contact.FirstName);
+
             Console.WriteLine("Processing...\n");
             Console.WriteLine("Details saved successfully");
             return;
@@ -63,7 +74,6 @@ namespace AddressBook
             if(_addressBook.ContainsKey(name))
             {
 
-            
                 bool notCompleted = true;
                 int choice;
 
@@ -91,11 +101,15 @@ namespace AddressBook
                     {
                         case 1:
                             Console.Write("Edit Updated City :");
+                            DeleteFromCityDict(_addressBook[name].City, name);
                             _addressBook[name].City = Console.ReadLine();
+                            AddToCityDict(_addressBook[name].City, name);
                             break;
                         case 2:
                             Console.Write("Edit Updated State :");
+                            DeleteFromStateDict(_addressBook[name].State, name);
                             _addressBook[name].State = Console.ReadLine();
+                            AddToStateDict(_addressBook[name].State, name);
                             break;
                         case 3:
                             Console.Write("Edit Updated Zip :");
@@ -135,6 +149,9 @@ namespace AddressBook
 
             if (_addressBook.ContainsKey(name))
             {
+                DeleteFromStateDict(_addressBook[name].State, name);
+                DeleteFromCityDict(_addressBook[name].City, name);
+
                 _addressBook.Remove(name);
                 Console.WriteLine("Details of " + name + " deleted successfully");
             }  
@@ -142,17 +159,33 @@ namespace AddressBook
                 Console.WriteLine("Details of " + name + " is not present");
             return;
         }
-        
+
         public void DisplayAllContacts()
         {
             Console.WriteLine("All Contacts are :");
-            foreach(var item in _addressBook)
+            foreach (var item in _addressBook)
             {
                 Console.WriteLine(item.Value.Display());
             }
         }
 
-        public void DisplayContactByState(string state)
+        //===================================================================//
+        //------------------------[ Public Methods ]-------------------------//
+        //-------------------------Search Operations----------------- -------//
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+
+
+        public Dictionary<string, List<string>> AllContactNamesByState()
+        {
+            return _personByState;
+        }
+
+        public Dictionary<string, List<string>> AllContactNamesByCity()
+        {
+            return _personByCity;
+        }
+
+        public void DisplayContactByState( string state)
         {
             foreach (var item in _addressBook)
             {
@@ -169,5 +202,79 @@ namespace AddressBook
                     Console.WriteLine(item.Value.Display());
             }
         }
+
+        //=================================================================//
+        //-------------------------Private Methods-------------------------//
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+        private void AddToStateDict(string state, string name)
+        {
+            if (this._personByState.ContainsKey(state))
+                this._personByState[state].Add(name);
+            else
+                this._personByState.Add(state, new List<string>() { name });
+        }
+
+        [Obsolete("Using Delete and Add methods instead of Edit method", true)]
+        private void EditStateDict(string state,string name)
+        {
+            int index;
+            if (this._personByState[state].Contains(name))
+            {
+                index = this._personByState[state].IndexOf(name);
+                this._personByState[state][index] = name;
+            }
+        }
+
+        private void DeleteFromStateDict(string state, string name)
+        {
+            int index;
+            if (this._personByState.ContainsKey(state))
+            {
+                if (this._personByState[state].Contains(name))
+                {
+                    index = this._personByState[state].IndexOf(name);
+                    this._personByState[state].RemoveAt(index);
+                }
+            }
+
+            if (this._personByState[state].Count == 0)
+                this._personByState.Remove(state);
+        }
+
+        private void AddToCityDict(string city, string name)
+        {
+            if (this._personByCity.ContainsKey(city))
+                this._personByCity[city].Add(name);
+            else
+                this._personByCity.Add(city, new List<string>() { name });
+        }
+
+        [Obsolete("Using Delete and Add methods instead of Edit method",true)]
+        private void EditCityDict(string city, string name)
+        {
+            int index;
+            if (this._personByCity[city].Contains(name))
+            {
+                index = this._personByCity[city].IndexOf(name);
+                this._personByCity[city][index] = name;
+            }
+        }
+
+        private void DeleteFromCityDict(string city, string name)
+        {
+            int index;
+            if(this._personByCity.ContainsKey(city))
+            {
+                if (this._personByCity[city].Contains(name))
+                {
+                    index = this._personByCity[city].IndexOf(name);
+                    this._personByCity[city].RemoveAt(index);
+                }
+            }
+
+            if (this._personByCity[city].Count == 0)
+                this._personByCity.Remove(city);
+        }
+
     }
 }
