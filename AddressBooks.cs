@@ -96,6 +96,8 @@ namespace AddressBook
             }
         }
 
+        //=========================[ State Profile ]=====================//
+
         public void DisplayPersonNameByState()
         {
             Dictionary<string, List<string>> personsByState = new Dictionary<string, List<string>>();
@@ -112,6 +114,36 @@ namespace AddressBook
             }
         }
 
+        public Dictionary<string,int> CountPersonsByState()
+        {
+            Dictionary<string, int> count = new Dictionary<string, int>();
+
+            Dictionary<string, List<string>> personsByState = new Dictionary<string, List<string>>();
+            personsByState = SearchPersonsByState();
+            foreach (var items in personsByState)
+            {
+                count.Add(items.Key, items.Value.Count);
+            }
+
+            return count;
+        }
+
+        public void DisplayPersonCountByState()
+        {
+            Dictionary<string, int> countByState = new Dictionary<string, int>();
+            countByState = CountPersonsByState();
+
+            Console.WriteLine("State     Count");
+            Console.WriteLine("_________________");
+            foreach (var item in countByState)
+            {
+                Console.WriteLine(item.Key + "     " + item.Value);
+            }
+            Console.WriteLine();
+        }
+
+        //======================[ City Profile ]========================//
+
         public void DisplayPersonNameByCity()
         {
             Dictionary<string, List<string>> personsByCity = new Dictionary<string, List<string>>();
@@ -124,6 +156,33 @@ namespace AddressBook
                 {
                     Console.WriteLine(person+" , ");
                 }
+            }
+        }
+
+        public Dictionary<string, int> CountPersonsByCity()
+        {
+            Dictionary<string, int> count = new Dictionary<string, int>();
+
+            Dictionary<string, List<string>> personsByCity = new Dictionary<string, List<string>>();
+            personsByCity = SearchPersonsByCity();
+            foreach (var items in personsByCity)
+            {
+                count.Add(items.Key, items.Value.Count);
+            }
+
+            return count;
+        }
+
+        public void DisplayPersonCountByCity()
+        {
+            Dictionary<string, int> countByCity = new Dictionary<string, int>();
+            countByCity = CountPersonsByCity();
+
+            Console.WriteLine("City     Count");
+            Console.WriteLine("_________________");
+            foreach (var item in countByCity)
+            {
+                Console.WriteLine(item.Key + "     " + item.Value);
             }
         }
 

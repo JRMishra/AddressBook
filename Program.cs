@@ -130,9 +130,12 @@ namespace AddressBook
 
             } while (contAddressBook);
 
-            addressBooksCollection.DisplayPersonNameByState();
-            addressBooksCollection.DisplayPersonNameByCity();
+            //addressBooksCollection.DisplayPersonNameByState();
+            //addressBooksCollection.DisplayPersonNameByCity();
 
+            addressBooksCollection.DisplayPersonCountByState();
+            addressBooksCollection.DisplayPersonCountByCity();
+            
             return;
         }
     }
