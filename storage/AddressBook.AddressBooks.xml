@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AddressBook.AddressBooks>
+  <Home>
+    <JR>
+      <FirstName>JR</FirstName>
+      <LastName></LastName>
+      <City></City>
+      <State></State>
+      <Zip></Zip>
+      <PhoneNumber></PhoneNumber>
+      <Email></Email>
+    </JR>
+  </Home>
+  <Clg>
+    <Sup>
+      <FirstName>Sup</FirstName>
+      <LastName></LastName>
+      <City></City>
+      <State></State>
+      <Zip></Zip>
+      <PhoneNumber></PhoneNumber>
+      <Email></Email>
+    </Sup>
+  </Clg>
+</AddressBook.AddressBooks>

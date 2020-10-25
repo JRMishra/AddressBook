@@ -1,17 +1,21 @@
 ﻿using NLog.Fluent;
 using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
+using System.Runtime.Serialization;
 using System.Text;
+
 
 namespace AddressBook
 {
-    class AddressBooks
+    public class AddressBooks
     {
         LogDetails logDetails = new LogDetails();
-        string _name;
-        Dictionary<string, AddressBookMain> _multiAddressBooks = new Dictionary<string, AddressBookMain>();
-        //public Dictionary<string, List<string>> detailsOfAllByState = new Dictionary<string, List<string>>();
 
+        string _name;
+        public string Name { get => _name; set => _name = value; }
+        public Dictionary<string, AddressBookMain> _multiAddressBooks = new Dictionary<string, AddressBookMain>();
+        
         public AddressBooks()
         {
             this._name = "General";
@@ -22,11 +26,11 @@ namespace AddressBook
             this._name = name;
         }
 
-        public string Name { get => _name; set => _name = value; }
+        
 
-           //===================================================================//
-          //------------------------[ Public Methods ]-------------------------//
-         //--------------------------CRUD Operations--------------------------//
+        //===================================================================//
+        //------------------------[ Public Methods ]-------------------------//
+        //--------------------------CRUD Operations--------------------------//
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
         //Add new contact details in address book
@@ -118,6 +122,7 @@ namespace AddressBook
                 Console.WriteLine($"{_name} address book is empty");
             }
         }
+
         //=========================[ State Profile ]=====================//
 
         public void DisplayPersonNameByState()
@@ -207,6 +212,10 @@ namespace AddressBook
                 Console.WriteLine(item.Key + "     " + item.Value);
             }
         }
+
+        //===========================[ File IO ]============================//
+
+        
 
         //=================================================================//
         //-------------------------Private Methods-------------------------//

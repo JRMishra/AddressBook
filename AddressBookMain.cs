@@ -6,16 +6,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
+using System.Runtime.Serialization;
 
 namespace AddressBook
 {
-    class AddressBookMain
+    
+    public class AddressBookMain
     {
         Dictionary<string, ContactDetails> _addressBook;
+
         Dictionary<string, List<string>> _personByState = new Dictionary<string, List<string>>();
+        
         Dictionary<string, List<string>> _personByCity = new Dictionary<string, List<string>>();
         
         LogDetails logDetails = new LogDetails();
+
+        public Dictionary<string, ContactDetails> AddressBook { get => _addressBook; set => _addressBook = value; }
 
         public AddressBookMain()
         {

@@ -4,7 +4,8 @@ using System.Text;
 
 namespace AddressBook
 {
-    class Address
+    [Serializable]
+    public class Address
     {
         string _city;
         string _state;

@@ -4,7 +4,8 @@ using System.Text;
 
 namespace AddressBook
 {
-    class ContactDetails
+    [Serializable]
+    public class ContactDetails
     {
         string _firstName;
         string _lastName;
