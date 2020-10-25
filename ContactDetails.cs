@@ -43,5 +43,10 @@ namespace AddressBook
             return "\nName : " + this.FirstName + " " + this.LastName + "\nAddress : " + this.City + "," + this.State + "," + this.Zip +
                 "\nPhone : " + this.PhoneNumber + "\nEmail Id : " + this.Email;
         }
+
+        public override string ToString()
+        {
+            return FirstName + " " + LastName;
+        }
     }
 }

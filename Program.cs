@@ -92,6 +92,7 @@ namespace AddressBook
                     "2 : Edit a Contact Detail\n" +
                     "3 : Delete a Contact Detail\n" +
                     "4 : Search across a state\n" +
+                    "5 : Sort persons by name\n" +
                     "0 : Exit");
                     try
                     {
@@ -119,6 +120,9 @@ namespace AddressBook
                             string stateToSearch = Console.ReadLine();
                             addressBooksCollection.SearchCurrentAddressBookByState(stateToSearch);
                             break;
+                        case 5:
+                            addressBooksCollection.SortPersonsByName();
+                            break;
                         case 0:
                             contContactPanel = false;
                             break;
@@ -129,9 +133,6 @@ namespace AddressBook
                 }
 
             } while (contAddressBook);
-
-            //addressBooksCollection.DisplayPersonNameByState();
-            //addressBooksCollection.DisplayPersonNameByCity();
 
             addressBooksCollection.DisplayPersonCountByState();
             addressBooksCollection.DisplayPersonCountByCity();

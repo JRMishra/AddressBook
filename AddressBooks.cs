@@ -96,6 +96,29 @@ namespace AddressBook
             }
         }
 
+        //===================================================================//
+        //------------------------[ Public Methods ]-------------------------//
+        //------------------------Sorting Operations-------------------------//
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+
+        public void SortPersonsByName()
+        {
+            if(_multiAddressBooks.ContainsKey(_name))
+            { 
+                List<string> sortedPersonsByName = _multiAddressBooks[_name].sortedByName();
+                if(sortedPersonsByName.Count>0)
+                {
+                    Console.WriteLine("Contacts after sorting by name");
+                    foreach (string person in sortedPersonsByName)
+                        Console.WriteLine(person);
+                }
+            }
+            else
+            {
+                Console.WriteLine($"{_name} address book is empty");
+            }
+        }
+
         //=========================[ State Profile ]=====================//
 
         public void DisplayPersonNameByState()

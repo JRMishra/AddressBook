@@ -9,9 +9,6 @@
 *.user
 *.userosscache
 *.sln.docstates
-*.pdb
-*.dll
-*.exe
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -32,5 +29,6 @@ bld/
 
 # Visual Studio 
 .vs/
-bin/
-obj/
+.vs/AddressBook/v16/.suo
+v16/
+bash.exe.stackdump

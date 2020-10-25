@@ -1,5 +1,6 @@
 ﻿using NLog;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.ExceptionServices;
@@ -201,6 +202,22 @@ namespace AddressBook
                 if(item.Value.City == city)
                     Console.WriteLine(item.Value.Display());
             }
+        }
+
+        //===================================================================//
+        //------------------------[ Public Methods ]-------------------------//
+        //-------------------------Sorting Operations----------------- -------//
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+
+        public List<string> sortedByName()
+        {
+            List<string> sortedName = new List<string>();
+            foreach(var element in _addressBook)
+            {
+                sortedName.Add(element.Value.ToString());
+            }
+            sortedName.Sort();
+            return sortedName;
         }
 
         //=================================================================//
