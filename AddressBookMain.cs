@@ -1,8 +1,10 @@
 ﻿using NLog;
+using NLog.Config;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.ExceptionServices;
 
 namespace AddressBook
@@ -209,7 +211,7 @@ namespace AddressBook
         //-------------------------Sorting Operations----------------- -------//
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
-        public List<string> sortedByName()
+        public List<string> SortedByName()
         {
             List<string> sortedName = new List<string>();
             foreach(var element in _addressBook)
@@ -217,6 +219,36 @@ namespace AddressBook
                 sortedName.Add(element.Value.ToString());
             }
             sortedName.Sort();
+            return sortedName;
+        }
+
+        public List<string> SortedByProperty(string property)
+        {
+            List<ContactDetails> contactDetails = new List<ContactDetails>();
+            List<string> sortedName = new List<string>();
+
+            Type typeRef;
+            typeRef = Type.GetType("AddressBook.ContactDetails");
+            PropertyInfo propertyInfo = typeRef.GetProperty(property);
+            if (propertyInfo == null)
+            {
+                Console.WriteLine("wrong property name");
+                return sortedName;
+            }
+            //Console.WriteLine($"Property : {propertyInfo.Name}");
+            foreach (var element in _addressBook)
+            {
+                //Console.WriteLine("AddressBookMain : "+propertyInfo.GetValue(element.Value));
+                if(propertyInfo.GetValue(element.Value) != null)
+                    contactDetails.Add(element.Value);
+            }
+            contactDetails = contactDetails.OrderBy(item => propertyInfo.GetValue(item)).ToList();
+            
+            foreach(var contact in contactDetails)
+            {
+                //Console.WriteLine("2nd foreach loop : "+contact.ToString());
+                sortedName.Add(contact.ToString());
+            }
             return sortedName;
         }
 

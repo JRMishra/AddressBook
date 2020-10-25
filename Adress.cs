@@ -12,9 +12,9 @@ namespace AddressBook
 
         public Address()
         {
-            this.City = "";
-            this.State = "";
-            this.Zip = "";
+            this.City = "__";
+            this.State = "__";
+            this.Zip = "__";
         }
 
         public Address(string City, string State, string Zip)

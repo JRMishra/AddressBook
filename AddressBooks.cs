@@ -101,15 +101,15 @@ namespace AddressBook
         //------------------------Sorting Operations-------------------------//
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
-        public void SortPersonsByName()
+        public void SortPersonsByProperty(string property)
         {
-            if(_multiAddressBooks.ContainsKey(_name))
-            { 
-                List<string> sortedPersonsByName = _multiAddressBooks[_name].sortedByName();
-                if(sortedPersonsByName.Count>0)
+            if (_multiAddressBooks.ContainsKey(_name))
+            {
+                List<string> sortedPersonsByProperty = _multiAddressBooks[_name].SortedByProperty(property);
+                if (sortedPersonsByProperty.Count > 0)
                 {
-                    Console.WriteLine("Contacts after sorting by name");
-                    foreach (string person in sortedPersonsByName)
+                    Console.WriteLine($"Contacts after sorting by {property}");
+                    foreach (string person in sortedPersonsByProperty)
                         Console.WriteLine(person);
                 }
             }
@@ -118,7 +118,6 @@ namespace AddressBook
                 Console.WriteLine($"{_name} address book is empty");
             }
         }
-
         //=========================[ State Profile ]=====================//
 
         public void DisplayPersonNameByState()

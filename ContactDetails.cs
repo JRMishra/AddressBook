@@ -34,7 +34,7 @@ namespace AddressBook
         public string LastName { get => _lastName; set => _lastName = value; }
         public string PhoneNumber { get => _phNo; set => _phNo = value; }
         public string Email { get => _email; set => _email = value; }
-        public string City { get => _address.City; set => _address.City = value; }
+        public string City { get=>_address.City; set=>_address.City=value; }
         public string State { get => _address.State; set => _address.State = value; }
         public string Zip { get => _address.Zip; set => _address.Zip = value; }
 

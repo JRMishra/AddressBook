@@ -92,7 +92,7 @@ namespace AddressBook
                     "2 : Edit a Contact Detail\n" +
                     "3 : Delete a Contact Detail\n" +
                     "4 : Search across a state\n" +
-                    "5 : Sort persons by name\n" +
+                    "5 : Sort persons\n" +
                     "0 : Exit");
                     try
                     {
@@ -121,7 +121,14 @@ namespace AddressBook
                             addressBooksCollection.SearchCurrentAddressBookByState(stateToSearch);
                             break;
                         case 5:
-                            addressBooksCollection.SortPersonsByName();
+                            Console.WriteLine("Enter\n" +
+                                "1 : Sort by name\n" +
+                                "2 : Sort by city\n" +
+                                "3 : Sort by state\n" +
+                                "4 : Sort by Zip");
+                            int userChoiceToSort = Int32.Parse(Console.ReadLine());
+                            string[] property = new string[5] {"", "FirstName" , "City", "State", "Zip"};
+                            addressBooksCollection.SortPersonsByProperty(property[userChoiceToSort]);
                             break;
                         case 0:
                             contContactPanel = false;
