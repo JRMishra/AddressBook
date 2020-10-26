@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<DictToListMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AddressBookName>
+    <string>General</string>
+    <string>Home</string>
+  </AddressBookName>
+  <ContactName>
+    <string>Jyoti</string>
+    <string>JR</string>
+  </ContactName>
+  <FirstName>
+    <string>Jyoti</string>
+    <string>JR</string>
+  </FirstName>
+  <LastName>
+    <string>Mishra</string>
+    <string>M</string>
+  </LastName>
+  <City>
+    <string>Ods</string>
+    <string />
+  </City>
+  <State>
+    <string>Ods</string>
+    <string />
+  </State>
+  <ZipCode>
+    <string />
+    <string />
+  </ZipCode>
+  <PhoneNumber>
+    <string />
+    <string />
+  </PhoneNumber>
+  <Email>
+    <string />
+    <string />
+  </Email>
+</DictToListMapping>

@@ -10,13 +10,13 @@ namespace AddressBook
     [Serializable]
     class Program
     {
-
-
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Address Book");
             Console.WriteLine("========================");
             AddressBooks addressBooksCollection = new AddressBooks();
+            AlternateIoOperations.DeerializeList(ref addressBooksCollection);
+
             LogDetails logDetails = new LogDetails();
 
             addressBooksCollection.Name = "General";
@@ -146,128 +146,11 @@ namespace AddressBook
 
             } while (contAddressBook);
 
-            StoreInXmlFile(addressBooksCollection);
-
+            //AlternateIoOperations.SerializeList(addressBooksCollection);
+            
+            //IoOperations.StoreInXmlFile(addressBooksCollection);
+            //IoOperations.ReadFromXmlFile();
             return;
-        }
-
-        private static void StoreInXmlFile(AddressBooks addressBooksCollection)
-        {
-            string fileName = addressBooksCollection.ToString();
-            string path = @"C:\Users\user\Desktop\Training-CapG\AddressBook\storage\" + fileName + ".xml";
-            
-            XmlWriter xmlWriter = XmlWriter.Create(path, new XmlWriterSettings { Indent = true, ConformanceLevel= ConformanceLevel.Auto});
-            
-            xmlWriter.WriteStartDocument();
-            xmlWriter.WriteStartElement(addressBooksCollection.ToString());
-            foreach (var element in addressBooksCollection._multiAddressBooks)
-            {
-                xmlWriter.WriteStartElement(element.Key);
-                xmlWriter.WriteAttributeString("Key", "AddressBookName");
-                foreach (var item in element.Value.AddressBook)
-                {
-                    xmlWriter.WriteStartElement(item.Key);
-                    xmlWriter.WriteAttributeString("Key", "PersonName");
-
-                    xmlWriter.WriteStartElement("FirstName");
-                    xmlWriter.WriteString(item.Value.FirstName);
-                    xmlWriter.WriteEndElement();
-
-                    xmlWriter.WriteStartElement("LastName");
-                    xmlWriter.WriteString(item.Value.LastName);
-                    xmlWriter.WriteEndElement();
-                    
-                    xmlWriter.WriteStartElement("City");
-                    xmlWriter.WriteString(item.Value.City);
-                    xmlWriter.WriteEndElement();
-                    
-                    xmlWriter.WriteStartElement("State");
-                    xmlWriter.WriteString(item.Value.State);
-                    xmlWriter.WriteEndElement();
-                    
-                    xmlWriter.WriteStartElement("Zip");
-                    xmlWriter.WriteString(item.Value.Zip);
-                    xmlWriter.WriteEndElement();
-
-                    xmlWriter.WriteStartElement("PhoneNumber");
-                    xmlWriter.WriteString(item.Value.PhoneNumber);
-                    xmlWriter.WriteEndElement();
-
-                    xmlWriter.WriteStartElement("Email");
-                    xmlWriter.WriteString(item.Value.Email);
-                    xmlWriter.WriteEndElement();
-
-                    xmlWriter.WriteEndElement();
-                }
-                xmlWriter.WriteEndElement();
-            }
-            xmlWriter.WriteEndElement();
-            xmlWriter.WriteEndDocument();
-            xmlWriter.Close();
-        }
-
-        private static void ReadFromXmltFile()
-        {
-            string path = @"C:\Users\user\Desktop\Training-CapG\AddressBook\storage\AddressBook.AddressBooks.xml";
-            string key, personName="", bookName="";
-
-            AddressBooks addressBooks = new AddressBooks();
-            AddressBookMain addressBookMain = new AddressBookMain();
-            ContactDetails contactDetails = new ContactDetails();
-
-            XmlReader xmlReader = XmlReader.Create(path);
-            while(xmlReader.Read())
-            {
-                if(xmlReader.HasAttributes)
-                {
-                    key = xmlReader.GetAttribute(0);
-                    if (key == "AddressBookName")
-                    {
-                        if(bookName.Length>0)
-                        {
-                            addressBookMain.AddressBook.Add(personName, contactDetails);
-                            addressBooks._multiAddressBooks.Add(bookName, addressBookMain);
-                        }    
-                        bookName = xmlReader.ReadContentAsString();
-                    }
-                        
-                    if(key == "PersonName")
-                    {
-                        if (personName.Length > 0)
-                            
-                        personName = xmlReader.ReadContentAsString();
-                    }
-                }
-                else
-                {
-                    switch(xmlReader.Name.ToString())
-                    {
-                        case "FirstName":
-                            contactDetails.FirstName = xmlReader.ReadContentAsString();
-                            break;
-                        case "LastName":
-                            contactDetails.LastName = xmlReader.ReadContentAsString();
-                            break;
-                        case "City":
-                            contactDetails.City = xmlReader.ReadContentAsString();
-                            break;
-                        case "State":
-                            contactDetails.State = xmlReader.ReadContentAsString();
-                            break;
-                        case "Zip":
-                            contactDetails.Zip = xmlReader.ReadContentAsString();
-                            break;
-                        case "PhoneNumber":
-                            contactDetails.PhoneNumber = xmlReader.ReadContentAsString();
-                            break;
-                        case "Email":
-                            contactDetails.Email = xmlReader.ReadContentAsString();
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
         }
     }
 
