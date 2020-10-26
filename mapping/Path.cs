@@ -9,5 +9,7 @@ namespace AddressBook.mapping
         public static string XmlFilePath =  @"C:\Users\user\Desktop\Training-CapG\AddressBook\dataStorage\AddressBookList.xml";
         
         public static string CsvFilePath =  @"C:\Users\user\Desktop\Training-CapG\AddressBook\dataStorage\AddressBookList.csv";   
+        
+        public static string JsonFilePath =  @"C:\Users\user\Desktop\Training-CapG\AddressBook\dataStorage\AddressBookList.json";   
     }
 }

@@ -16,8 +16,10 @@ namespace AddressBook
             Console.WriteLine("Welcome to Address Book");
             Console.WriteLine("========================");
             AddressBooks addressBooksCollection = new AddressBooks();
+
             //IoOperations.DeserializeAddressBooks(ref addressBooksCollection);
-            CsvOperations.ReadFromCsv(ref addressBooksCollection);
+            //CsvOperations.ReadFromCsv(ref addressBooksCollection);
+            JsonOperation.ReadFromJson(ref addressBooksCollection);
 
             LogDetails logDetails = new LogDetails();
 
@@ -149,9 +151,8 @@ namespace AddressBook
             } while (contAddressBook);
 
             //IoOperations.SerializeAddressBooks(addressBooksCollection);
-
-            CsvOperations.WriteToCsv(addressBooksCollection);
-            //CsvOperations.ReadFromCsv(ref addressBooksCollection);
+            //CsvOperations.WriteToCsv(addressBooksCollection);
+            JsonOperation.WriteToJson(addressBooksCollection);
 
             return;
         }
