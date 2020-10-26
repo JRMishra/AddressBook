@@ -1,102 +1,98 @@
-﻿using NLog.Config;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text;
-using System.Xml;
+using System.Xml.Serialization;
 
 namespace AddressBook
 {
+    [Serializable]
     class IoOperations
     {
-        public static void StoreInXmlFile(AddressBooks addressBooksCollection)
+        private static DictToListMapping DictionaryToList(AddressBooks addressBooks)
         {
-            string fileName = addressBooksCollection.ToString();
-            string path = @"C:\Users\user\Desktop\Training-CapG\AddressBook\storage\" + fileName + ".xml";
+            DictToListMapping dictToList = new DictToListMapping();
 
-            XmlWriter xmlWriter = XmlWriter.Create(path, new XmlWriterSettings { Indent = true, ConformanceLevel = ConformanceLevel.Auto });
-
-            xmlWriter.WriteStartDocument();
-            xmlWriter.WriteStartElement(addressBooksCollection.ToString());
-            foreach (var element in addressBooksCollection._multiAddressBooks)
+            string addressBookName = "";
+            foreach (var element in addressBooks._multiAddressBooks)
             {
-                xmlWriter.WriteStartElement("AddressBookName");
-                xmlWriter.WriteString(element.Key);
-                foreach (var item in element.Value.AddressBook)
+                addressBookName = element.Key;
+                foreach (var contact in element.Value.AddressBook)
                 {
-                    xmlWriter.WriteStartElement("PersonName");
-                    xmlWriter.WriteString(item.Key);
-
-                    xmlWriter.WriteStartElement("FirstName");
-                    xmlWriter.WriteString(item.Value.FirstName);
-                    xmlWriter.WriteEndElement();
-
-                    xmlWriter.WriteStartElement("LastName");
-                    xmlWriter.WriteString(item.Value.LastName);
-                    xmlWriter.WriteEndElement();
-
-                    xmlWriter.WriteStartElement("City");
-                    xmlWriter.WriteString(item.Value.City);
-                    xmlWriter.WriteEndElement();
-
-                    xmlWriter.WriteStartElement("State");
-                    xmlWriter.WriteString(item.Value.State);
-                    xmlWriter.WriteEndElement();
-
-                    xmlWriter.WriteStartElement("Zip");
-                    xmlWriter.WriteString(item.Value.Zip);
-                    xmlWriter.WriteEndElement();
-
-                    xmlWriter.WriteStartElement("PhoneNumber");
-                    xmlWriter.WriteString(item.Value.PhoneNumber);
-                    xmlWriter.WriteEndElement();
-
-                    xmlWriter.WriteStartElement("Email");
-                    xmlWriter.WriteString(item.Value.Email);
-                    xmlWriter.WriteEndElement();
-
-                    xmlWriter.WriteEndElement();
+                    
+                    dictToList.AddressBookName.Add(addressBookName);
+                    dictToList.ContactName.Add(contact.Key);
+                    dictToList.FirstName.Add(contact.Value.FirstName);
+                    dictToList.LastName.Add(contact.Value.LastName);
+                    dictToList.City.Add(contact.Value.City);
+                    dictToList.State.Add(contact.Value.State);
+                    dictToList.ZipCode.Add(contact.Value.Zip);
+                    dictToList.PhoneNumber.Add(contact.Value.PhoneNumber);
+                    dictToList.Email.Add(contact.Value.Email);
                 }
-                xmlWriter.WriteEndElement();
             }
-            xmlWriter.WriteEndElement();
-            xmlWriter.WriteEndDocument();
-            xmlWriter.Close();
+            return dictToList;
         }
-        
-        public static void ReadFromXmlFile()
+
+        private static AddressBooks ListToDictionary(DictToListMapping dictToList)
         {
             AddressBooks addressBooks = new AddressBooks();
-            AddressBookMain addressBookMain = new AddressBookMain();
-            ContactDetails contactDetails = new ContactDetails();
+            AddressBookMain addressBookMain;
+            ContactDetails contactDetails;
 
-            string path = @"C:\Users\user\Desktop\Training-CapG\AddressBook\storage\sample.xml";
-            XmlReader xmlReader = XmlReader.Create(path);
-            string addressBookName = "";
-            string personName = "";
-            string element = "";
-
-            while (xmlReader.Read())
+            string addressBookName = "", contactName = "";
+            for(int i=0;i<dictToList.AddressBookName.Count; i++)
             {
-                switch(xmlReader.NodeType)
+                addressBookMain = new AddressBookMain();
+                contactDetails = new ContactDetails();
+
+                addressBookName = dictToList.AddressBookName[i];
+                contactName = dictToList.ContactName[i];
+                contactDetails.FirstName = dictToList.FirstName[i];
+                contactDetails.LastName = dictToList.LastName[i];
+                contactDetails.City = dictToList.City[i];
+                contactDetails.State = dictToList.State[i];
+                contactDetails.Zip = dictToList.ZipCode[i];
+                contactDetails.PhoneNumber = dictToList.PhoneNumber[i];
+                contactDetails.Email = dictToList.Email[i];
+
+                if (addressBooks._multiAddressBooks.ContainsKey(addressBookName))
+                    addressBooks._multiAddressBooks[addressBookName].AddressBook.Add(contactName, contactDetails);
+                else
                 {
-                    case XmlNodeType.Document:
-                        Console.WriteLine("Document : "+xmlReader.Value);
-                        break;
-                    case XmlNodeType.Element:
-                        Console.WriteLine("Element : "+xmlReader.Value);
-                        break;
-                    case XmlNodeType.Text:
-                        Console.WriteLine("Text : "+xmlReader.Value);
-                        break;
-                    case XmlNodeType.EndElement:
-                        Console.WriteLine("End Element : " + xmlReader.Value);
-                        break;
-                    default:
-                        Console.WriteLine("Default : "+xmlReader.Name);
-                        break;
+                    addressBookMain.AddressBook.Add(contactName, contactDetails);
+                    addressBooks._multiAddressBooks.Add(addressBookName, addressBookMain);
                 }
             }
+            return addressBooks;
         }
 
+        public static void SerializeAddressBooks(AddressBooks addressBooks)
+        {
+            DictToListMapping dictToList = new DictToListMapping(DictionaryToList(addressBooks));
+            
+            string path = @"C:\Users\user\Desktop\Training-CapG\AddressBook\storage\AddressBookList.xml";
+
+            XmlSerializer xmlser = new XmlSerializer(typeof(DictToListMapping));
+            FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.Write);
+            xmlser.Serialize(fileStream, dictToList);
+            fileStream.Close();
+        }
+
+        public static void DeserializeAddressBooks(ref AddressBooks addressBooks)
+        {
+            string path = @"C:\Users\user\Desktop\Training-CapG\AddressBook\storage\AddressBookList.xml";
+
+            DictToListMapping dictToListMapping = new DictToListMapping();
+
+            XmlSerializer xmlser = new XmlSerializer(typeof(DictToListMapping));
+            FileStream fileStream = new FileStream(path, FileMode.Open);
+            dictToListMapping = (DictToListMapping)xmlser.Deserialize(fileStream);
+            fileStream.Close();
+
+            addressBooks = ListToDictionary(dictToListMapping);
+
+        }
     }
 }

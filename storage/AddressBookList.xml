@@ -3,37 +3,46 @@
   <AddressBookName>
     <string>General</string>
     <string>Home</string>
+    <string>Home</string>
   </AddressBookName>
   <ContactName>
     <string>Jyoti</string>
     <string>JR</string>
+    <string>Dibya</string>
   </ContactName>
   <FirstName>
     <string>Jyoti</string>
     <string>JR</string>
+    <string>Dibya</string>
   </FirstName>
   <LastName>
     <string>Mishra</string>
     <string>M</string>
+    <string>Panda</string>
   </LastName>
   <City>
     <string>Ods</string>
     <string />
+    <string>Bpd</string>
   </City>
   <State>
     <string>Ods</string>
     <string />
+    <string>Ods</string>
   </State>
   <ZipCode>
     <string />
     <string />
+    <string>757</string>
   </ZipCode>
   <PhoneNumber>
     <string />
     <string />
+    <string>876</string>
   </PhoneNumber>
   <Email>
     <string />
     <string />
+    <string>dbpsa@gmail</string>
   </Email>
 </DictToListMapping>

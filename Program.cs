@@ -15,7 +15,7 @@ namespace AddressBook
             Console.WriteLine("Welcome to Address Book");
             Console.WriteLine("========================");
             AddressBooks addressBooksCollection = new AddressBooks();
-            AlternateIoOperations.DeerializeList(ref addressBooksCollection);
+            IoOperations.DeserializeAddressBooks(ref addressBooksCollection);
 
             LogDetails logDetails = new LogDetails();
 
@@ -146,10 +146,7 @@ namespace AddressBook
 
             } while (contAddressBook);
 
-            //AlternateIoOperations.SerializeList(addressBooksCollection);
-            
-            //IoOperations.StoreInXmlFile(addressBooksCollection);
-            //IoOperations.ReadFromXmlFile();
+            IoOperations.SerializeAddressBooks(addressBooksCollection);
             return;
         }
     }
