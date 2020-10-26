@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AddressBook.DBoperations;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
@@ -15,7 +16,8 @@ namespace AddressBook
             Console.WriteLine("Welcome to Address Book");
             Console.WriteLine("========================");
             AddressBooks addressBooksCollection = new AddressBooks();
-            IoOperations.DeserializeAddressBooks(ref addressBooksCollection);
+            //IoOperations.DeserializeAddressBooks(ref addressBooksCollection);
+            CsvOperations.ReadFromCsv(ref addressBooksCollection);
 
             LogDetails logDetails = new LogDetails();
 
@@ -146,7 +148,11 @@ namespace AddressBook
 
             } while (contAddressBook);
 
-            IoOperations.SerializeAddressBooks(addressBooksCollection);
+            //IoOperations.SerializeAddressBooks(addressBooksCollection);
+
+            CsvOperations.WriteToCsv(addressBooksCollection);
+            //CsvOperations.ReadFromCsv(ref addressBooksCollection);
+
             return;
         }
     }

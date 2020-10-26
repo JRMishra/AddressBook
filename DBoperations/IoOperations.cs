@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AddressBook.mapping;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -10,7 +11,7 @@ namespace AddressBook
     [Serializable]
     class IoOperations
     {
-        private static DictToListMapping DictionaryToList(AddressBooks addressBooks)
+        public static DictToListMapping DictionaryToList(AddressBooks addressBooks)
         {
             DictToListMapping dictToList = new DictToListMapping();
 
@@ -35,7 +36,7 @@ namespace AddressBook
             return dictToList;
         }
 
-        private static AddressBooks ListToDictionary(DictToListMapping dictToList)
+        public static AddressBooks ListToDictionary(DictToListMapping dictToList)
         {
             AddressBooks addressBooks = new AddressBooks();
             AddressBookMain addressBookMain;
@@ -71,8 +72,8 @@ namespace AddressBook
         public static void SerializeAddressBooks(AddressBooks addressBooks)
         {
             DictToListMapping dictToList = new DictToListMapping(DictionaryToList(addressBooks));
-            
-            string path = @"C:\Users\user\Desktop\Training-CapG\AddressBook\storage\AddressBookList.xml";
+
+            string path = FilePath.XmlFilePath;
 
             XmlSerializer xmlser = new XmlSerializer(typeof(DictToListMapping));
             FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.Write);
@@ -82,7 +83,7 @@ namespace AddressBook
 
         public static void DeserializeAddressBooks(ref AddressBooks addressBooks)
         {
-            string path = @"C:\Users\user\Desktop\Training-CapG\AddressBook\storage\AddressBookList.xml";
+            string path = FilePath.XmlFilePath;
 
             DictToListMapping dictToListMapping = new DictToListMapping();
 
