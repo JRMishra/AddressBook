@@ -33,10 +33,10 @@ namespace AddressBook
             this._addressBook = contactAddress;
         }
 
-           //===================================================================//
-          //------------------------[ Public Methods ]-------------------------//
-         //--------------------------CRUD Operations--------------------------//
-        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+           
+        //------------------------[ Public Methods ]-------------------------//
+       //--------------------------CRUD Operations--------------------------//
+        
         public void AddContactDetails()
         {
             ContactDetails contact = new ContactDetails();
@@ -72,6 +72,13 @@ namespace AddressBook
             Console.WriteLine("Processing...\n");
             Console.WriteLine("Details saved successfully");
             return;
+        }
+
+        public void AddContactDetails(ContactDetails contact)
+        {
+            _addressBook.Add(contact.FirstName, contact);
+            AddToStateDict(contact.State, contact.FirstName);
+            AddToCityDict(contact.City, contact.FirstName);
         }
 
         public void EditContactDetails()
@@ -178,12 +185,9 @@ namespace AddressBook
             }
         }
 
-        //===================================================================//
         //------------------------[ Public Methods ]-------------------------//
-        //-------------------------Search Operations----------------- -------//
-        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
-
-
+        //------------------------Search Operations----------------- -------//
+        
         public Dictionary<string, List<string>> AllContactNamesByState()
         {
             return _personByState;
@@ -212,11 +216,9 @@ namespace AddressBook
             }
         }
 
-        //===================================================================//
-        //------------------------[ Public Methods ]-------------------------//
-        //-------------------------Sorting Operations----------------- -------//
-        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
-
+       //------------------------[ Public Methods ]-------------------------//
+      //------------------------Sorting Operations----------------- -------//
+        
         public List<string> SortedByName()
         {
             List<string> sortedName = new List<string>();
@@ -260,7 +262,7 @@ namespace AddressBook
 
         //=================================================================//
         //-------------------------Private Methods-------------------------//
-        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+        
         private void AddToStateDict(string state, string name)
         {
             if (this._personByState.ContainsKey(state))

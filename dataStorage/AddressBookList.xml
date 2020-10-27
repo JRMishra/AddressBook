@@ -3,73 +3,55 @@
   <AddressBookName>
     <string>General</string>
     <string>General</string>
-    <string>Home</string>
-    <string>Home</string>
-    <string>Home</string>
-    <string>Office</string>
+    <string>College</string>
+    <string>College</string>
   </AddressBookName>
   <ContactName>
-    <string>Jyoti</string>
-    <string>Kaberi</string>
-    <string>JR</string>
-    <string>Dibya</string>
     <string>Jyoti Ranjan</string>
-    <string>Tejas</string>
+    <string>Shreya</string>
+    <string>Supratim</string>
+    <string>Naveen</string>
   </ContactName>
   <FirstName>
-    <string>Jyoti</string>
-    <string>Kaberi</string>
-    <string>JR</string>
-    <string>Dibya</string>
     <string>Jyoti Ranjan</string>
-    <string>Tejas</string>
+    <string>Shreya</string>
+    <string>Supratim</string>
+    <string>Naveen</string>
   </FirstName>
   <LastName>
     <string>Mishra</string>
-    <string>Sarkar</string>
-    <string>M</string>
-    <string>Panda</string>
     <string>Mishra</string>
-    <string>Shah</string>
+    <string>Dey</string>
+    <string>Kumar</string>
   </LastName>
   <City>
-    <string>Ods</string>
-    <string>kolkata</string>
     <string />
-    <string>Bpd</string>
-    <string>Baripada</string>
     <string />
+    <string>Kolkata</string>
+    <string>Patna</string>
   </City>
   <State>
-    <string>Ods</string>
+    <string />
+    <string />
     <string>Wb</string>
-    <string />
-    <string>Ods</string>
-    <string>Odisha</string>
-    <string />
+    <string>Bihar</string>
   </State>
   <ZipCode>
-    <string />
-    <string />
-    <string />
-    <string>757</string>
     <string>757001</string>
+    <string />
+    <string />
     <string />
   </ZipCode>
   <PhoneNumber>
     <string />
     <string />
     <string />
-    <string>876</string>
-    <string>9802345</string>
     <string />
   </PhoneNumber>
   <Email>
     <string />
     <string />
     <string />
-    <string>dbpsa@gmail</string>
-    <string>jrm@nitdgp</string>
     <string />
   </Email>
 </DictToListMapping>

@@ -14,10 +14,11 @@ namespace AddressBook.DBoperations
 {
     class CsvOperations
     {
+        static string path = PathToFile.CsvFilePath;
+
         public static void WriteToCsv(AddressBooks addressBooks)
         {
-            DictToListMapping dictToList = new DictToListMapping(IoOperations.DictionaryToList(addressBooks));
-            string path = FilePath.CsvFilePath;
+            DictToListMapping dictToList = new DictToListMapping(DictToListMapping.DictionaryToList(addressBooks));
             List<string[]> records = new List<string[]>();
             string[] person;
 
@@ -39,7 +40,6 @@ namespace AddressBook.DBoperations
             }
 
             Type type = dictToList.GetType();
-
             PropertyInfo[] propertyInfo = type.GetProperties();
 
             using (var writer = new StreamWriter(path))
@@ -55,7 +55,6 @@ namespace AddressBook.DBoperations
 
         public static void ReadFromCsv(ref AddressBooks addressBooks)
         {
-            string path = FilePath.CsvFilePath;
             DictToListMapping dictToListMapping = new DictToListMapping();
 
             var lines = File.ReadAllLines(path);
@@ -82,11 +81,9 @@ namespace AddressBook.DBoperations
                 dictToList.ZipCode.Add(values[6]);
                 dictToList.PhoneNumber.Add(values[7]);
                 dictToList.Email.Add(values[8]);
-
-                index++;
             }
 
-            addressBooks = IoOperations.ListToDictionary(dictToList);
+            addressBooks =  DictToListMapping.ListToDictionary(dictToList);
         }
     }
 }

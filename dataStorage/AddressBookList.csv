@@ -1,8 +1,5 @@
 AddressBookName,ContactName,FirstName,LastName,City,State,ZipCode,PhoneNumber,Email
-General,Jyoti,Jyoti,Mishra,Ods,Ods,,,
-General,Kaberi,Kaberi,Sarkar,kolkata,Wb,,,
-General,Saurabh,Saurabh,Kumar,Kolkata,Wb,,,
-Home,JR,JR,M,,,,,
-Home,Dibya,Dibya,Panda,Bpd,Ods,757,876,dbpsa@gmail
-Home,Jyoti Ranjan,Jyoti Ranjan,Mishra,Baripada,Odisha,757001,9802345,jrm@nitdgp
-Office,Tejas,Tejas,Shah,,,,,
+General,Jyoti Ranjan,Jyoti Ranjan,Mishra,,,757001,,
+General,Shreya,Shreya,Mishra,,,,,
+College,Supratim,Supratim,Dey,Kolkata,Wb,,,
+College,Naveen,Naveen,Kumar,Patna,Bihar,,,

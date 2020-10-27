@@ -26,12 +26,8 @@ namespace AddressBook
             this._name = name;
         }
 
-        
-
-        //===================================================================//
         //------------------------[ Public Methods ]-------------------------//
         //--------------------------CRUD Operations--------------------------//
-        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
         //Add new contact details in address book
         public void AddNewContactInAddressBook()
@@ -44,7 +40,6 @@ namespace AddressBook
                 addressBook.AddContactDetails();
                 _multiAddressBooks.Add(this._name, addressBook);
             }
-
         }
 
         //Edit contact details of a person in address book

@@ -9,7 +9,9 @@ namespace AddressBook
     {
         string _firstName;
         string _lastName;
-        Address _address;
+        string _city;
+        string _state;
+        string _zip;
         string _phNo;
         string _email;
 
@@ -17,7 +19,9 @@ namespace AddressBook
         {
             this._firstName = "";
             this._lastName = "";
-            this._address = new Address();
+            this._city = "-";
+            this._state = "-";
+            this._zip = "-";
             this._phNo = "";
             this._email = "";
         }
@@ -26,7 +30,9 @@ namespace AddressBook
         {
             this._firstName = FirstName;
             this._lastName = LastName;
-            this._address = new Address(City,State,Zip);
+            this._city = City;
+            this._state = State;
+            this._zip = Zip;
             this._phNo = PhoneNumber;
             this._email = Email;
         }
@@ -35,9 +41,9 @@ namespace AddressBook
         public string LastName { get => _lastName; set => _lastName = value; }
         public string PhoneNumber { get => _phNo; set => _phNo = value; }
         public string Email { get => _email; set => _email = value; }
-        public string City { get=>_address.City; set=>_address.City=value; }
-        public string State { get => _address.State; set => _address.State = value; }
-        public string Zip { get => _address.Zip; set => _address.Zip = value; }
+        public string City { get=>_city; set=>_city=value; }
+        public string State { get => _state; set => _state = value; }
+        public string Zip { get => _zip; set => _zip = value; }
 
         public string Display()
         {
