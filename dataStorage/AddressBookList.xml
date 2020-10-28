@@ -5,6 +5,7 @@
     <string>General</string>
     <string>College</string>
     <string>College</string>
+    <string>College</string>
     <string>Home</string>
   </AddressBookName>
   <ContactName>
@@ -12,6 +13,7 @@
     <string>Shreya</string>
     <string>Supratim</string>
     <string>Naveen</string>
+    <string>SayanGoswami</string>
     <string>Subham</string>
   </ContactName>
   <FirstName>
@@ -19,6 +21,7 @@
     <string>Shreya</string>
     <string>Supratim</string>
     <string>Naveen</string>
+    <string>Sayan</string>
     <string>Subham</string>
   </FirstName>
   <LastName>
@@ -26,6 +29,7 @@
     <string>Mishra</string>
     <string>Dey</string>
     <string>Kumar</string>
+    <string>Goswami</string>
     <string>Mishra</string>
   </LastName>
   <City>
@@ -33,6 +37,7 @@
     <string />
     <string>Kolkata</string>
     <string>Patna</string>
+    <string>Kolkata</string>
     <string>Baripada</string>
   </City>
   <State>
@@ -40,6 +45,7 @@
     <string />
     <string>Wb</string>
     <string>Bihar</string>
+    <string>WestBengal</string>
     <string>Odisha</string>
   </State>
   <ZipCode>
@@ -47,6 +53,7 @@
     <string />
     <string />
     <string />
+    <string>234567</string>
     <string>757001</string>
   </ZipCode>
   <PhoneNumber>
@@ -54,6 +61,7 @@
     <string />
     <string />
     <string />
+    <string>8761230923</string>
     <string>7008411232</string>
   </PhoneNumber>
   <Email>
@@ -61,6 +69,7 @@
     <string />
     <string />
     <string />
+    <string>sg@nit.go</string>
     <string>jrm@gmail.org</string>
   </Email>
 </DictToListMapping>

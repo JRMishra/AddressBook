@@ -1,12 +1,9 @@
-﻿using NLog;
-using NLog.Config;
+﻿using AddressBook.validation;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.ExceptionServices;
-using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
 
 namespace AddressBook
 {
@@ -40,32 +37,9 @@ namespace AddressBook
         public void AddContactDetails()
         {
             ContactDetails contact = new ContactDetails();
+            string saveNameAs= EnterContactDetailsManually(ref contact);
 
-            Console.WriteLine("Enter\n");
-
-            Console.Write("First Name : ");
-            contact.FirstName = Console.ReadLine();
-            if(_addressBook.ContainsKey(contact.FirstName))
-            {
-                Console.WriteLine("You can't enter duplicate contact details in the same address book");
-                return;
-            }   
-
-            Console.Write("Last Name : ");
-            contact.LastName = Console.ReadLine();
-            Console.Write("City : ");
-            contact.City = Console.ReadLine();
-            Console.Write("State : ");
-            contact.State = Console.ReadLine();
-            Console.Write("Zip : ");
-            contact.Zip = Console.ReadLine();
-            Console.Write("Phone Number : ");
-            contact.PhoneNumber = Console.ReadLine();
-            Console.Write("Email : ");
-            contact.Email = Console.ReadLine();
-            Console.WriteLine();
-
-            _addressBook.Add(contact.FirstName, contact);
+            _addressBook.Add(saveNameAs, contact);
             AddToStateDict(contact.State, contact.FirstName);
             AddToCityDict(contact.City, contact.FirstName);
 
@@ -271,17 +245,6 @@ namespace AddressBook
                 this._personByState.Add(state, new List<string>() { name });
         }
 
-        [Obsolete("Using Delete and Add methods instead of Edit method", true)]
-        private void EditStateDict(string state,string name)
-        {
-            int index;
-            if (this._personByState[state].Contains(name))
-            {
-                index = this._personByState[state].IndexOf(name);
-                this._personByState[state][index] = name;
-            }
-        }
-
         private void DeleteFromStateDict(string state, string name)
         {
             int index;
@@ -306,17 +269,6 @@ namespace AddressBook
                 this._personByCity.Add(city, new List<string>() { name });
         }
 
-        [Obsolete("Using Delete and Add methods instead of Edit method",true)]
-        private void EditCityDict(string city, string name)
-        {
-            int index;
-            if (this._personByCity[city].Contains(name))
-            {
-                index = this._personByCity[city].IndexOf(name);
-                this._personByCity[city][index] = name;
-            }
-        }
-
         private void DeleteFromCityDict(string city, string name)
         {
             int index;
@@ -331,6 +283,56 @@ namespace AddressBook
 
             if (this._personByCity[city].Count == 0)
                 this._personByCity.Remove(city);
+        }
+
+        //Take property name as arg and store the user input in that property of Contact Detail Class
+        private string TakeUserInput(string propertyName)
+        {
+            Type typeContact = typeof(ContactDetails);
+            PropertyInfo contactProperty = typeContact.GetProperty(propertyName,BindingFlags.Public|BindingFlags.Instance);
+            Type typeValidation = typeof(ValidateContact);
+            PropertyInfo validationProperty = typeValidation.GetProperty(propertyName + "Pattern", BindingFlags.Public | BindingFlags.Static);
+            Type typeRule = typeof(ValidationRules);
+            PropertyInfo ruleProperty = typeRule.GetProperty(propertyName+"Rule",BindingFlags.Public | BindingFlags.Static);
+            
+            string propValue;
+            bool status;
+            do
+            {
+                Console.Write(contactProperty.Name + " : ");
+                propValue = Console.ReadLine();
+                status = Regex.IsMatch(propValue,validationProperty.GetValue(null,null).ToString());
+                if(!status)
+                {
+                    Console.WriteLine("Invalid !!");
+                    Console.WriteLine(ruleProperty.GetValue(null).ToString());
+                }
+            } while (!status);
+            
+            return propValue;
+        }
+
+        //Method to manually enter contact details and validate
+        private string EnterContactDetailsManually(ref ContactDetails contact)
+        {
+            Console.WriteLine("Enter\n");
+            contact.FirstName = TakeUserInput("FirstName");
+            contact.LastName = TakeUserInput("LastName");
+            contact.City = TakeUserInput("City");
+            contact.State = TakeUserInput("State");
+            contact.Zip = TakeUserInput("Zip");
+            contact.PhoneNumber = TakeUserInput("PhoneNumber");
+            contact.Email = TakeUserInput("Email");
+            Console.WriteLine();
+
+            int i = 1;
+            string contactName = contact.FirstName + contact.LastName;
+            while(_addressBook.ContainsKey(contactName))
+            {
+                contactName += i;
+                i++;
+            }
+            return contactName;
         }
 
     }
