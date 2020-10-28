@@ -5,53 +5,62 @@
     <string>General</string>
     <string>College</string>
     <string>College</string>
+    <string>Home</string>
   </AddressBookName>
   <ContactName>
     <string>Jyoti Ranjan</string>
     <string>Shreya</string>
     <string>Supratim</string>
     <string>Naveen</string>
+    <string>Subham</string>
   </ContactName>
   <FirstName>
     <string>Jyoti Ranjan</string>
     <string>Shreya</string>
     <string>Supratim</string>
     <string>Naveen</string>
+    <string>Subham</string>
   </FirstName>
   <LastName>
     <string>Mishra</string>
     <string>Mishra</string>
     <string>Dey</string>
     <string>Kumar</string>
+    <string>Mishra</string>
   </LastName>
   <City>
     <string />
     <string />
     <string>Kolkata</string>
     <string>Patna</string>
+    <string>Baripada</string>
   </City>
   <State>
     <string />
     <string />
     <string>Wb</string>
     <string>Bihar</string>
+    <string>Odisha</string>
   </State>
   <ZipCode>
     <string>757001</string>
     <string />
     <string />
     <string />
+    <string>757001</string>
   </ZipCode>
   <PhoneNumber>
     <string />
     <string />
     <string />
     <string />
+    <string>7008411232</string>
   </PhoneNumber>
   <Email>
     <string />
     <string />
     <string />
     <string />
+    <string>jrm@gmail.org</string>
   </Email>
 </DictToListMapping>
