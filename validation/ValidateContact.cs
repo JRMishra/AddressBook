@@ -5,6 +5,9 @@ using System.Text.RegularExpressions;
 
 namespace AddressBook.validation
 {
+    /// <summary>
+    /// Class having regex patterns to validate ContactDetails Class property
+    /// </summary>
     class ValidateContact
     {
         public static string BookNamePattern { get; } = "^[A - Z][a - z A - Z]{2,}$";
@@ -16,6 +19,11 @@ namespace AddressBook.validation
         public static string PhoneNumberPattern { get; } = "^([0-9][ ])?[1-9][0-9]{9}$";
         public static string EmailPattern { get; } = "^[a-z0-9A-Z]+([-.+_][a-z0-9+-]+)*@[a-z0-9A-Z]+[.][a-z]{2,3}([.][a-z]{2,})?$";
 
+        /// <summary>
+        /// Validate all details of a contact
+        /// </summary>
+        /// <param name="contact">instance of ContactDetails Class to validate</param>
+        /// <returns>Array of validation results for all properties</returns>
         public static bool[] ValidateContactDetails(ContactDetails contact)
         {
             bool[] validationResult = new bool[7];

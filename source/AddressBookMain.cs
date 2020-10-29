@@ -1,23 +1,18 @@
-﻿using AddressBook.validation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
-
-namespace AddressBook
+﻿namespace AddressBook
 {
-    
+    using AddressBook.validation;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text.RegularExpressions;
+
     public class AddressBookMain
     {
         Dictionary<string, ContactDetails> _addressBook;
-
         Dictionary<string, List<string>> _personByState = new Dictionary<string, List<string>>();
-        
         Dictionary<string, List<string>> _personByCity = new Dictionary<string, List<string>>();
         
-        LogDetails logDetails = new LogDetails();
-
         public Dictionary<string, ContactDetails> AddressBook { get => _addressBook; set => _addressBook = value; }
 
         public AddressBookMain()
@@ -30,10 +25,12 @@ namespace AddressBook
             this._addressBook = contactAddress;
         }
 
-           
         //------------------------[ Public Methods ]-------------------------//
        //--------------------------CRUD Operations--------------------------//
         
+        /// <summary>
+        /// Manually add contact details to an address book
+        /// </summary>
         public void AddContactDetails()
         {
             ContactDetails contact = new ContactDetails();
@@ -48,6 +45,10 @@ namespace AddressBook
             return;
         }
 
+        /// <summary>
+        /// Take contact details as arg and add it to an address book
+        /// </summary>
+        /// <param name="contact">Contact detail to add</param>
         public void AddContactDetails(ContactDetails contact)
         {
             _addressBook.Add(contact.FirstName, contact);
@@ -55,18 +56,16 @@ namespace AddressBook
             AddToCityDict(contact.City, contact.FirstName);
         }
 
+        /// <summary>
+        /// Edit details of an existing contact
+        /// </summary>
         public void EditContactDetails()
         {
-            string name;
             Console.WriteLine("Enter First Name whose details need to be edited ");
-            name = Console.ReadLine();
-
+            string name = Console.ReadLine();
             if(_addressBook.ContainsKey(name))
             {
-
                 bool notCompleted = true;
-                int choice;
-
                 Console.WriteLine("Enter\n" +
                         "1 : Edit City\n" +
                         "2 : Edit State\n" +
@@ -74,56 +73,18 @@ namespace AddressBook
                         "4 : Edit Phone Number\n" +
                         "5 : Edit Email ID\n" +
                         "0 : Edit Completed");
-
                 while (notCompleted)
                 {
-                    try
+                    string choice = Console.ReadLine();
+                    if (choice != "0")
                     {
-                       choice = Int32.Parse(Console.ReadLine());
-                    }
-                    catch(Exception e)
-                    {
-                        logDetails.LogDebug("Class : AddressBookMain , Method : EditContact, Field : choice");
-                        logDetails.LogError(e.Message + " It should be a integer");
-                        choice = 0;
-                    }
-                    switch (choice)
-                    {
-                        case 1:
-                            Console.Write("Edit Updated City :");
-                            DeleteFromCityDict(_addressBook[name].City, name);
-                            _addressBook[name].City = Console.ReadLine();
-                            AddToCityDict(_addressBook[name].City, name);
-                            break;
-                        case 2:
-                            Console.Write("Edit Updated State :");
-                            DeleteFromStateDict(_addressBook[name].State, name);
-                            _addressBook[name].State = Console.ReadLine();
-                            AddToStateDict(_addressBook[name].State, name);
-                            break;
-                        case 3:
-                            Console.Write("Edit Updated Zip :");
-                            _addressBook[name].Zip = Console.ReadLine();
-                            break;
-                        case 4:
-                            Console.Write("Edit Updated Phone Number :");
-                            _addressBook[name].PhoneNumber = Console.ReadLine();
-                            break;
-                        case 5:
-                            Console.Write("Edit Updated Email Id :");
-                            _addressBook[name].State = Console.ReadLine();
-                            break;
-                        case 0:
-                            notCompleted = false;
-                            break;
-                        default:
-                            Console.WriteLine("Wrong Choice\nChoose Again");
-                            break;
-                    }
-                    if (choice != 0)
+                        EditContactDetailsSwitch(name, choice);
                         Console.WriteLine("\nIf there is anything else to edit, enter respective number\n" + "else enter 0 to exit");
+                    }
+                    else
+                        notCompleted = false;
                 }
-                
+
             }
             else
             {
@@ -131,6 +92,9 @@ namespace AddressBook
             }
         }
 
+        /// <summary>
+        /// Delete a contact detail
+        /// </summary>
         public void DeleteContactDetails()
         {
             string name;
@@ -150,6 +114,9 @@ namespace AddressBook
             return;
         }
 
+        /// <summary>
+        /// Display all contact details
+        /// </summary>
         public void DisplayAllContacts()
         {
             Console.WriteLine("All Contacts are :");
@@ -161,17 +128,29 @@ namespace AddressBook
 
         //------------------------[ Public Methods ]-------------------------//
         //------------------------Search Operations----------------- -------//
-        
+
+        /// <summary>
+        /// Retrieve state names and list of contacts from respective states
+        /// </summary>
+        /// <returns></returns>
         public Dictionary<string, List<string>> AllContactNamesByState()
         {
             return _personByState;
         }
 
+        /// <summary>
+        /// Retrieve city names and list of contacts from respective cities
+        /// </summary>
+        /// <returns></returns>
         public Dictionary<string, List<string>> AllContactNamesByCity()
         {
             return _personByCity;
         }
 
+        /// <summary>
+        /// Display list of contacts in an address book from specified state
+        /// </summary>
+        /// <param name="state">State name to display contacts</param>
         public void DisplayContactByState( string state)
         {
             foreach (var item in _addressBook)
@@ -181,6 +160,10 @@ namespace AddressBook
             }
         }
 
+        /// <summary>
+        /// Display list of contacts in an address book from specified city
+        /// </summary>
+        /// <param name="city">City name to display contacts</param>
         public void DisplayContactByCity(string city)
         {
             foreach (var item in _addressBook)
@@ -193,6 +176,10 @@ namespace AddressBook
        //------------------------[ Public Methods ]-------------------------//
       //------------------------Sorting Operations----------------- -------//
         
+        /// <summary>
+        /// Retrieve contact names sorted by first name
+        /// </summary>
+        /// <returns></returns>
         public List<string> SortedByName()
         {
             List<string> sortedName = new List<string>();
@@ -204,6 +191,11 @@ namespace AddressBook
             return sortedName;
         }
 
+        /// <summary>
+        /// Retrieve contact names sorted by any property, if exists
+        /// </summary>
+        /// <param name="property">Property name to sort</param>
+        /// <returns>Returns list of names sorted by specified property</returns>
         public List<string> SortedByProperty(string property)
         {
             List<ContactDetails> contactDetails = new List<ContactDetails>();
@@ -217,10 +209,9 @@ namespace AddressBook
                 Console.WriteLine("wrong property name");
                 return sortedName;
             }
-            //Console.WriteLine($"Property : {propertyInfo.Name}");
+
             foreach (var element in _addressBook)
             {
-                //Console.WriteLine("AddressBookMain : "+propertyInfo.GetValue(element.Value));
                 if(propertyInfo.GetValue(element.Value) != null)
                     contactDetails.Add(element.Value);
             }
@@ -228,7 +219,6 @@ namespace AddressBook
             
             foreach(var contact in contactDetails)
             {
-                //Console.WriteLine("2nd foreach loop : "+contact.ToString());
                 sortedName.Add(contact.ToString());
             }
             return sortedName;
@@ -237,6 +227,9 @@ namespace AddressBook
         //=================================================================//
         //-------------------------Private Methods-------------------------//
         
+        /// <summary>
+        /// Add name to dictionary having state names and list of persons for respective states
+        /// </summary>
         private void AddToStateDict(string state, string name)
         {
             if (this._personByState.ContainsKey(state))
@@ -245,6 +238,9 @@ namespace AddressBook
                 this._personByState.Add(state, new List<string>() { name });
         }
 
+        /// <summary>
+        /// delete name from dictionary having state names and list of persons for respective states
+        /// </summary>
         private void DeleteFromStateDict(string state, string name)
         {
             int index;
@@ -261,6 +257,9 @@ namespace AddressBook
                 this._personByState.Remove(state);
         }
 
+        /// <summary>
+        /// Add name to dictionary having city names and list of persons for respective cities
+        /// </summary>
         private void AddToCityDict(string city, string name)
         {
             if (this._personByCity.ContainsKey(city))
@@ -269,6 +268,9 @@ namespace AddressBook
                 this._personByCity.Add(city, new List<string>() { name });
         }
 
+        /// <summary>
+        /// Delete name from dictionary having city names and list of persons for respective cities
+        /// </summary>
         private void DeleteFromCityDict(string city, string name)
         {
             int index;
@@ -285,7 +287,12 @@ namespace AddressBook
                 this._personByCity.Remove(city);
         }
 
-        //Take property name as arg and store the user input in that property of Contact Detail Class
+        /// <summary>
+        /// Take ContactDetails class property name as arg and 
+        /// validate user input with rules associated with respective property
+        /// </summary>
+        /// <param name="propertyName">Property name to store user input</param>
+        /// <returns>Valid user input for respective property</returns>
         private string TakeUserInput(string propertyName)
         {
             Type typeContact = typeof(ContactDetails);
@@ -312,7 +319,11 @@ namespace AddressBook
             return propValue;
         }
 
-        //Method to manually enter contact details and validate
+        /// <summary>
+        /// Manually enter contact details to store in an address book
+        /// </summary>
+        /// <param name="contact">ref to instance of ContactDetails class to input value</param>
+        /// <returns>Contact name to save as</returns>
         private string EnterContactDetailsManually(ref ContactDetails contact)
         {
             Console.WriteLine("Enter\n");
@@ -333,6 +344,45 @@ namespace AddressBook
                 i++;
             }
             return contactName;
+        }
+
+        /// <summary>
+        /// Switch cases to edit details of an existing contact
+        /// </summary>
+        /// <param name="name">Name of contact</param>
+        /// <param name="choice">Property (Other than names) to edit</param>
+        private void EditContactDetailsSwitch(string name, string choice)
+        {
+            switch (choice)
+            {
+                case "1":
+                    Console.Write("Edit Updated City :");
+                    DeleteFromCityDict(_addressBook[name].City, name);
+                    _addressBook[name].City = Console.ReadLine();
+                    AddToCityDict(_addressBook[name].City, name);
+                    break;
+                case "2":
+                    Console.Write("Edit Updated State :");
+                    DeleteFromStateDict(_addressBook[name].State, name);
+                    _addressBook[name].State = Console.ReadLine();
+                    AddToStateDict(_addressBook[name].State, name);
+                    break;
+                case "3":
+                    Console.Write("Edit Updated Zip :");
+                    _addressBook[name].Zip = Console.ReadLine();
+                    break;
+                case "4":
+                    Console.Write("Edit Updated Phone Number :");
+                    _addressBook[name].PhoneNumber = Console.ReadLine();
+                    break;
+                case "5":
+                    Console.Write("Edit Updated Email Id :");
+                    _addressBook[name].State = Console.ReadLine();
+                    break;
+                default:
+                    Console.WriteLine("Wrong Choice\nChoose Again");
+                    break;
+            }
         }
 
     }

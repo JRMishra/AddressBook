@@ -1,12 +1,7 @@
-﻿using AddressBook.validation;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
-
-namespace AddressBook
+﻿namespace AddressBook
 {
-    [Serializable]
+    using System;
+
     public class ContactDetails
     {
         string _firstName;
@@ -47,12 +42,19 @@ namespace AddressBook
         public string State { get => _state; set => _state = value; }
         public string Zip { get => _zip; set => _zip = value; }
 
+        /// <summary>
+        /// </summary>
+        /// <returns>All details of a contact as single string</returns>
         public string Display()
         {
             return "\nName : " + this.FirstName + " " + this.LastName + "\nAddress : " + this.City + "," + this.State + "," + this.Zip +
                 "\nPhone : " + this.PhoneNumber + "\nEmail Id : " + this.Email;
         }
 
+        /// <summary>
+        /// Overridden method to return full name of a contact
+        /// </summary>
+        /// <returns>firstname+" "+lastname</returns>
         public override string ToString()
         {
             return FirstName + " " + LastName;

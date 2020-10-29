@@ -4,6 +4,10 @@ using System.Text;
 
 namespace AddressBook.validation
 {
+    /// <summary>
+    /// Class having rules to validate
+    /// different property associated with ContactDetails Class
+    /// </summary>
     class ValidationRules
     {
         public static string FirstNameRule { get; } = "1. min 3 characters\n2. first letter in upper case";

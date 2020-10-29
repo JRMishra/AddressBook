@@ -5,6 +5,9 @@ using System.Text;
 
 namespace AddressBook
 {
+    /// <summary>
+    /// To login execution details
+    /// </summary>
     class LogDetails
     {
         private readonly Logger logger = LogManager.GetCurrentClassLogger();

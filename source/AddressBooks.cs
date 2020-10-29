@@ -1,17 +1,10 @@
-﻿using NLog.Fluent;
-using System;
-using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
-using System.Runtime.Serialization;
-using System.Text;
-
-
-namespace AddressBook
+﻿namespace AddressBook
 {
+    using System;
+    using System.Collections.Generic;
+
     public class AddressBooks
     {
-        LogDetails logDetails = new LogDetails();
-
         string _name;
         public string Name { get => _name; set => _name = value; }
         public Dictionary<string, AddressBookMain> _multiAddressBooks = new Dictionary<string, AddressBookMain>();
@@ -21,15 +14,12 @@ namespace AddressBook
             this._name = "General";
         }
 
-        public AddressBooks(string name)
-        {
-            this._name = name;
-        }
-
         //------------------------[ Public Methods ]-------------------------//
         //--------------------------CRUD Operations--------------------------//
 
-        //Add new contact details in address book
+        /// <summary>
+        /// Add new contact details in address book
+        /// </summary>
         public void AddNewContactInAddressBook()
         {
             if (_multiAddressBooks.ContainsKey(this._name))
@@ -42,36 +32,34 @@ namespace AddressBook
             }
         }
 
-        //Edit contact details of a person in address book
-        public void EditDetailsInAddressBook()
-        {
-            _multiAddressBooks[Name].EditContactDetails();
-        }
+        /// <summary>
+        /// Edit contact details of a person in address book
+        /// </summary>
+        public void EditDetailsInAddressBook() => _multiAddressBooks[Name].EditContactDetails();
 
-        //Delete a contact detail
-        public void DeleteOneContactDetail()
-        {
-            _multiAddressBooks[Name].DeleteContactDetails();
-        }
+        /// <summary>
+        /// Delete one contact detail present in address book
+        /// </summary>
+        public void DeleteOneContactDetail() => _multiAddressBooks[Name].DeleteContactDetails();
 
-        //Display contact details in current address book
-        public void DisplayContactsInCurrentAddressBook()
-        {
-            _multiAddressBooks[Name].DisplayAllContacts();
-        }
+        /// <summary>
+        /// Display contact details in current address book
+        /// </summary>
+        public void DisplayContactsInCurrentAddressBook() => _multiAddressBooks[Name].DisplayAllContacts();
 
-           //===================================================================//
-          //------------------------[ Public Methods ]-------------------------//
-         //------------------------Display Operations-------------------------//
-        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+        //------------------------[ Public Methods ]-------------------------//
+        //------------------------Display Operations-------------------------//
 
-        //Search contact details of a state in current address book
-        public void SearchCurrentAddressBookByState(string state)
-        {
-            _multiAddressBooks[Name].DisplayContactByState(state);
-        }
+        /// <summary>
+        /// Search contact details of a state accross current address books
+        /// </summary>
+        /// <param name="state">State name to search for</param>
+        public void SearchCurrentAddressBookByState(string state) => _multiAddressBooks[Name].DisplayContactByState(state);
 
-        //Search contact details of a state accross all address books
+        /// <summary>
+        /// Search contact details of a state accross all address books
+        /// </summary>
+        /// <param name="state">State name to search for</param>
         public void SearchAllAddressBooksByState(string state)
         {
             foreach (var addressBook in _multiAddressBooks)
@@ -80,13 +68,16 @@ namespace AddressBook
             }
         }
 
-        //Search contact details of a city in current address book
-        public void SearchCurrentAddressBookByCity(string city)
-        {
-            _multiAddressBooks[Name].DisplayContactByCity(city);
-        }
+        /// <summary>
+        /// Search contact details of a city in current address book
+        /// </summary>
+        /// <param name="city">City name to search for</param>
+        public void SearchCurrentAddressBookByCity(string city) => _multiAddressBooks[Name].DisplayContactByCity(city);
 
-        //Search contact details of a city accross all address books
+        /// <summary>
+        /// Search contact details by city accross all address books
+        /// </summary>
+        /// <param name="city">Name of city to search</param>
         public void SearchAllAddressBooksByCity(string city)
         {
             foreach (var addressBook in _multiAddressBooks)
@@ -95,11 +86,12 @@ namespace AddressBook
             }
         }
 
-        //===================================================================//
-        //------------------------[ Public Methods ]-------------------------//
-        //------------------------Sorting Operations-------------------------//
-        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+       //------------------------Sorting Operations-------------------------//
 
+        /// <summary>
+        /// To sort person names in a address book by any property
+        /// </summary>
+        /// <param name="property">Property name to sort by</param>
         public void SortPersonsByProperty(string property)
         {
             if (_multiAddressBooks.ContainsKey(_name))
@@ -120,6 +112,9 @@ namespace AddressBook
 
         //=========================[ State Profile ]=====================//
 
+        /// <summary>
+        /// Group & Display list of person names by their state
+        /// </summary>
         public void DisplayPersonNameByState()
         {
             Dictionary<string, List<string>> personsByState = new Dictionary<string, List<string>>();
@@ -136,6 +131,10 @@ namespace AddressBook
             }
         }
 
+        /// <summary>
+        /// Count of persons present by state for all states
+        /// </summary>
+        /// <returns>Dictionary containing state names ans person count for them</returns>
         public Dictionary<string,int> CountPersonsByState()
         {
             Dictionary<string, int> count = new Dictionary<string, int>();
@@ -150,6 +149,9 @@ namespace AddressBook
             return count;
         }
 
+        /// <summary>
+        /// Display count of contacts by their state
+        /// </summary>
         public void DisplayPersonCountByState()
         {
             Dictionary<string, int> countByState = new Dictionary<string, int>();
@@ -166,6 +168,9 @@ namespace AddressBook
 
         //======================[ City Profile ]========================//
 
+        /// <summary>
+        /// Group & Display list of person names by their city
+        /// </summary>
         public void DisplayPersonNameByCity()
         {
             Dictionary<string, List<string>> personsByCity = new Dictionary<string, List<string>>();
@@ -181,6 +186,10 @@ namespace AddressBook
             }
         }
 
+        /// <summary>
+        /// Count of persons present by city for all cities
+        /// </summary>
+        /// <returns>Dictionary containing city names ans person count for them</returns>
         public Dictionary<string, int> CountPersonsByCity()
         {
             Dictionary<string, int> count = new Dictionary<string, int>();
@@ -195,6 +204,9 @@ namespace AddressBook
             return count;
         }
 
+        /// <summary>
+        /// Display count of contacts by their city
+        /// </summary>
         public void DisplayPersonCountByCity()
         {
             Dictionary<string, int> countByCity = new Dictionary<string, int>();
@@ -208,14 +220,14 @@ namespace AddressBook
             }
         }
 
-        //===========================[ File IO ]============================//
-
-        
-
-        //=================================================================//
         //-------------------------Private Methods-------------------------//
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
+        /// <summary>
+        /// To merge dictionaries, having state names and list of persons for respective states, 
+        /// from all address books into one dictionary
+        /// </summary>
+        /// <returns>merged dictionary</returns>
         private Dictionary<string, List<string>> SearchPersonsByState()
         {
             Dictionary<string, List<string>> detailsOfAllByState = new Dictionary<string, List<string>>();
@@ -234,6 +246,11 @@ namespace AddressBook
             return detailsOfAllByState;
         }
 
+        /// <summary>
+        /// To merge dictionaries( having city names and list of persons for respective cities)
+        /// from all address books into one dictionary
+        /// </summary>
+        /// <returns>merged dictionary</returns>
         private Dictionary<string, List<string>> SearchPersonsByCity()
         {
             Dictionary<string, List<string>> detailsOfAllByCity = new Dictionary<string, List<string>>();
@@ -251,6 +268,5 @@ namespace AddressBook
             }
             return detailsOfAllByCity;
         }
-
     }
 }

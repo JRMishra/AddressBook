@@ -16,6 +16,10 @@ namespace AddressBook.DBoperations
     {
         static string path = PathToFile.CsvFilePath;
 
+        /// <summary>
+        /// Write addressbooks to CSV file
+        /// </summary>
+        /// <param name="addressBooks"></param>
         public static void WriteToCsv(AddressBooks addressBooks)
         {
             DictToListMapping dictToList = new DictToListMapping(DictToListMapping.DictionaryToList(addressBooks));
@@ -53,6 +57,10 @@ namespace AddressBook.DBoperations
 
         }
 
+        /// <summary>
+        /// Read from CSV file to store in address books
+        /// </summary>
+        /// <param name="addressBooks"></param>
         public static void ReadFromCsv(ref AddressBooks addressBooks)
         {
             DictToListMapping dictToListMapping = new DictToListMapping();

@@ -6,11 +6,17 @@ namespace AddressBook.mapping
 {
     class PathToFile
     {
-        //Path to XML File
+        /// <summary>
+        /// Path to XML File
+        /// </summary>
         public static string XmlFilePath =  @"C:\Users\user\Desktop\Training-CapG\AddressBook\dataStorage\AddressBookList.xml";
-        //Path to CSV file
-        public static string CsvFilePath =  @"C:\Users\user\Desktop\Training-CapG\AddressBook\dataStorage\AddressBookList.csv";   
-        //Path to JSON file
+        /// <summary>
+        /// Path to CSV File
+        /// </summary>
+        public static string CsvFilePath =  @"C:\Users\user\Desktop\Training-CapG\AddressBook\dataStorage\AddressBookList.csv";
+        /// <summary>
+        /// Path to JSON File
+        /// </summary>
         public static string JsonFilePath =  @"C:\Users\user\Desktop\Training-CapG\AddressBook\dataStorage\AddressBookList.json";   
     }
 }

@@ -4,14 +4,14 @@ using System.Text;
 
 namespace AddressBook
 {
-    /*
-     * This class will map the content of Address Books Dictionary to Lists
-     * As, dictionaries are by default, non-serializable, this class will be serialized
-     */
+     /// <summary>
+     /// This class will map the content of Address Books Dictionary to Lists
+     /// As, dictionaries are by default, non-serializable, this class will be serialized
+    /// </summary>
     [Serializable]
     public class DictToListMapping
     {
-        //Default constructer
+        ///Default constructer
         public DictToListMapping()
         {
             AddressBookName = new List<string>();
@@ -25,7 +25,7 @@ namespace AddressBook
             Email = new List<string>();
         }
 
-        //Copy constructer
+        ///Copy constructer
         public DictToListMapping(DictToListMapping dictToList)
         {
             AddressBookName = dictToList.AddressBookName;
@@ -49,7 +49,11 @@ namespace AddressBook
         public List<string> PhoneNumber { get; set; }
         public List<string> Email { get; set; }
 
-        //Method to map addressbooks dictionary to this class lists
+        /// <summary>
+        /// Method to map addressbooks dictionary to this class lists
+        /// </summary>
+        /// <param name="addressBooks">instance of AddressBooks Class to map</param>
+        /// <returns>Instance of this class after mapping</returns>
         public static DictToListMapping DictionaryToList(AddressBooks addressBooks)
         {
             DictToListMapping dictToList = new DictToListMapping();
@@ -74,7 +78,11 @@ namespace AddressBook
             return dictToList;
         }
 
-        //Method to map this class lists to a addressbook dictionary
+        /// <summary>
+        /// Method to map this class lists to a addressbooks dictionary
+        /// </summary>
+        /// <param name="dictToList">Instance of this class to map</param>
+        /// <returns>Instance of AddressBooks Class after mapping</returns>
         public static AddressBooks ListToDictionary(DictToListMapping dictToList)
         {
             AddressBooks addressBooks = new AddressBooks();

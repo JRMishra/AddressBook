@@ -5,10 +5,11 @@
 
     class ProgramStartUp
     {
+        /// <summary>
+        /// Start AddressBook Program to perform various operations
+        /// </summary>
         public static void Start()
         {
-            Console.WriteLine("Welcome to Address Book");
-            Console.WriteLine("========================");
             AddressBooks addressBooksCollection = new AddressBooks();
 
             FileReadingOperation(ref addressBooksCollection);
@@ -16,7 +17,6 @@
             addressBooksCollection.Name = "General";
             bool contAddressBook = true; ;
             bool contContactPanel = true; ;
-
             do
             {
                 Console.WriteLine("Enter\n" +
@@ -27,8 +27,13 @@
                 "0 : Exit");
 
                 string userChoice = Console.ReadLine();
-                AddressBookChoiceSwitch(ref addressBooksCollection, ref contAddressBook, ref contContactPanel, userChoice);
-
+                if(userChoice!="0")
+                    AddressBookChoiceSwitch(ref addressBooksCollection, userChoice);
+                else
+                {
+                    contAddressBook = false;
+                    contContactPanel = false;
+                }
                 while (contContactPanel)
                 {
                     Console.WriteLine("Enter\n" +
@@ -40,8 +45,12 @@
                     "0 : Exit");
 
                     string choice = Console.ReadLine();
-
-                    contContactPanel = AddressBookOperationSwitch(ref addressBooksCollection, contContactPanel, choice);
+                    if(choice!="0")
+                        AddressBookOperationSwitch(ref addressBooksCollection, choice);
+                    else
+                    {
+                        contContactPanel = false;
+                    }
                 }
 
             } while (contAddressBook);
@@ -50,6 +59,10 @@
         }
 
         //----------------------------------- [ Private Methods ]----------------------------------------//
+        /// <summary>
+        /// Write contact details of all address books in XML, CSV & JSON file
+        /// </summary>
+        /// <param name="addressBooksCollection"></param>
         private static void FileWritingOperation(AddressBooks addressBooksCollection)
         {
             LogDetails logDetails = new LogDetails();
@@ -66,6 +79,11 @@
             }
         }
 
+        /// <summary>
+        /// Read contact details from XML/ CSV / JSON file
+        /// and store in AddressBooks class instance
+        /// </summary>
+        /// <param name="addressBooksCollection">reference to addressbooks instance to store contact details</param>
         private static void FileReadingOperation(ref AddressBooks addressBooksCollection)
         {
             LogDetails logDetails = new LogDetails();
@@ -82,7 +100,13 @@
             }
         }
 
-        private static bool AddressBookOperationSwitch(ref AddressBooks addressBooksCollection, bool contContactPanel, string choice)
+        /// <summary>
+        /// Switch Cases for address books operation
+        /// </summary>
+        /// <param name="addressBooksCollection">addressbooks instance to perform operations</param>
+        /// <param name="choice">User input to choose operation among available options</param>
+        /// <returns></returns>
+        private static void AddressBookOperationSwitch(ref AddressBooks addressBooksCollection, string choice)
         {
             LogDetails logDetails = new LogDetails();
             switch (choice)
@@ -122,31 +146,28 @@
                     string[] property = new string[5] { "", "FirstName", "City", "State", "Zip" };
                     addressBooksCollection.SortPersonsByProperty(property[userChoiceToSort]);
                     break;
-                case "0":
-                    contContactPanel = false;
-                    break;
                 default:
                     break;
             }
-
-            return contContactPanel;
         }
 
-        private static void AddressBookChoiceSwitch(ref AddressBooks addressBooksCollection, ref bool contAddressBook, ref bool contContactPanel, string userChoice)
+        /// <summary>
+        /// Switch Cases to add / choose/ other operations involving all address books
+        /// </summary>
+        /// <param name="addressBooksCollection">ref to all address books</param>
+        /// <param name="userChoice">User input to choose operation among available options</param>
+        private static void AddressBookChoiceSwitch(ref AddressBooks addressBooksCollection, string userChoice)
         {
             switch (userChoice)
             {
                 case "1":
-                    contContactPanel = true;
                     Console.WriteLine("Add Name of the new Address Book");
                     addressBooksCollection.Name = Console.ReadLine();
                     break;
                 case "2":
-                    contContactPanel = true;
                     break;
                 case "3":
-                    contContactPanel = true;
-                    Console.WriteLine("Enter Name of the Address Book you want to switch");
+                   Console.WriteLine("Enter Name of the Address Book you want to switch");
                     addressBooksCollection.Name = Console.ReadLine();
                     break;
                 case "4":
@@ -170,12 +191,9 @@
                             break;
                     }
                     break;
-                case "0":
-                    contAddressBook = false;
-                    contContactPanel = false;
-                    break;
                 default:
                     Console.WriteLine("Wrong Option Entered !!");
+                    Console.WriteLine("Continuing with "+addressBooksCollection.Name+" address book");
                     break;
             }
         }

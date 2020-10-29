@@ -11,6 +11,10 @@ namespace AddressBook.DBoperations
     {
         static string path = PathToFile.JsonFilePath;
 
+        /// <summary>
+        /// Write addressbooks to JSON file
+        /// </summary>
+        /// <param name="addressBooks"></param>
         public static void WriteToJson(AddressBooks addressBooks)
         {
             DictToListMapping dictToList = new DictToListMapping(DictToListMapping.DictionaryToList(addressBooks));
@@ -19,6 +23,10 @@ namespace AddressBook.DBoperations
             File.WriteAllText(path, jsonData);
         }
 
+        /// <summary>
+        /// Read from JSON file to store in address books
+        /// </summary>
+        /// <param name="addressBooks"></param>
         public static void ReadFromJson(ref AddressBooks addressBooks)
         {
             DictToListMapping dictToList = new DictToListMapping();

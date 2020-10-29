@@ -13,6 +13,10 @@ namespace AddressBook
 
         static string path = PathToFile.XmlFilePath;
 
+        /// <summary>
+        /// XML Serialize instance of an AddressBooks Class
+        /// </summary>
+        /// <param name="addressBooks">instance to serialize</param>
         public static void SerializeAddressBooks(AddressBooks addressBooks)
         {
             DictToListMapping dictToList = new DictToListMapping(DictToListMapping.DictionaryToList(addressBooks));
@@ -23,6 +27,10 @@ namespace AddressBook
             fileStream.Close();
         }
 
+        /// <summary>
+        /// XML Deserialize and store in instance of AddressBooks Class
+        /// </summary>
+        /// <param name="addressBooks">ref to addressbooks instance</param>
         public static void DeserializeAddressBooks(ref AddressBooks addressBooks)
         {
             DictToListMapping dictToListMapping = new DictToListMapping();
