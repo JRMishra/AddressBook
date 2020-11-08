@@ -74,6 +74,7 @@
                 IoOperations.SerializeAddressBooks(addressBooksCollection);
                 CsvOperations.WriteToCsv(addressBooksCollection);
                 JsonOperation.WriteToJson(addressBooksCollection);
+                SqlServerOperation.WriteToSqlServer(addressBooksCollection);
             }
             catch (Exception e)
             {

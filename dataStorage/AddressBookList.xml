@@ -5,35 +5,41 @@
     <string>General</string>
     <string>Friend</string>
     <string>College</string>
+    <string>College</string>
   </AddressBookName>
   <ContactName>
     <string>BapunKarmakar</string>
     <string>SubhamSahu</string>
     <string>SuchiKaur</string>
     <string>Simram321</string>
+    <string>SupratimDey</string>
   </ContactName>
   <FirstName>
     <string>Bapun</string>
     <string>Subham</string>
     <string>Suchi</string>
     <string>Simran</string>
+    <string>Supratim</string>
   </FirstName>
   <LastName>
     <string>Karmakar</string>
     <string>Sahu</string>
     <string>Kaur</string>
     <string>Dasgupta</string>
+    <string>Dey</string>
   </LastName>
   <City>
     <string>Baripada</string>
     <string>Balasore</string>
     <string>Bubhaneswar</string>
     <string>Durgapur</string>
+    <string>Kolkata</string>
   </City>
   <State>
     <string>Odisha</string>
     <string>Odisha</string>
     <string>Odisha</string>
+    <string>WestBengal</string>
     <string>WestBengal</string>
   </State>
   <ZipCode>
@@ -41,17 +47,20 @@
     <string>757141</string>
     <string>757652</string>
     <string>812391</string>
+    <string>650125</string>
   </ZipCode>
   <PhoneNumber>
     <string>+91 2319804235</string>
     <string>+91 0423521098</string>
     <string>+91 6723500123</string>
     <string>+91 9980176528</string>
+    <string>9807123018</string>
   </PhoneNumber>
   <Email>
     <string>karmakarb@mymail.com</string>
     <string>sahu.subham@mymail.com</string>
     <string>ksuchi01@mymail.com</string>
     <string>dassimrangupta@mymail.com</string>
+    <string>tub@one.con</string>
   </Email>
 </DictToListMapping>

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace AddressBook.DBoperations
 {
@@ -32,6 +33,38 @@ namespace AddressBook.DBoperations
                 }
             }
             addressBooks = DictToListMapping.ListToDictionary(dictToList);
+        }
+
+        public static void WriteToSqlServer(AddressBooks addressBooks)
+        {
+            DictToListMapping dictToList = new DictToListMapping(DictToListMapping.DictionaryToList(addressBooks));
+
+            DataSet dataSet = new DataSet();
+            dataSet.Tables[0].Columns.Add("AddressBookName");
+            dataSet.Tables[0].Columns.Add("ContactName");
+            dataSet.Tables[0].Columns.Add("FirstName");
+            dataSet.Tables[0].Columns.Add("LastName");
+            dataSet.Tables[0].Columns.Add("City");
+            dataSet.Tables[0].Columns.Add("State");
+            dataSet.Tables[0].Columns.Add("Zip");
+            dataSet.Tables[0].Columns.Add("Phone");
+            dataSet.Tables[0].Columns.Add("Email");
+
+            for (int i = 0; i < dictToList.AddressBookName.Count; i++)
+            {
+                dataSet.Tables[0].Rows.Add(dictToList.AddressBookName[i]);
+                dataSet.Tables[0].Rows.Add(dictToList.ContactName[i]);
+                dataSet.Tables[0].Rows.Add(dictToList.FirstName[i]);
+                dataSet.Tables[0].Rows.Add(dictToList.LastName[i]);
+                dataSet.Tables[0].Rows.Add(dictToList.City[i]);
+                dataSet.Tables[0].Rows.Add(dictToList.State[i]);
+                dataSet.Tables[0].Rows.Add(dictToList.ZipCode[i]);
+                dataSet.Tables[0].Rows.Add(dictToList.PhoneNumber[i]);
+                dataSet.Tables[0].Rows.Add(dictToList.Email[i]);
+            }
+
+            SqlDataAdapter dataAdapter = new SqlDataAdapter();
+            dataAdapter.Update(dataSet);
         }
     }
 } 
