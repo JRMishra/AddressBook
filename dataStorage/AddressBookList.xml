@@ -3,73 +3,55 @@
   <AddressBookName>
     <string>General</string>
     <string>General</string>
+    <string>Friend</string>
     <string>College</string>
-    <string>College</string>
-    <string>College</string>
-    <string>Home</string>
   </AddressBookName>
   <ContactName>
-    <string>Jyoti Ranjan</string>
-    <string>Shreya</string>
-    <string>Supratim</string>
-    <string>Naveen</string>
-    <string>SayanGoswami</string>
-    <string>Subham</string>
+    <string>BapunKarmakar</string>
+    <string>SubhamSahu</string>
+    <string>SuchiKaur</string>
+    <string>Simram321</string>
   </ContactName>
   <FirstName>
-    <string>Jyoti Ranjan</string>
-    <string>Shreya</string>
-    <string>Supratim</string>
-    <string>Naveen</string>
-    <string>Sayan</string>
+    <string>Bapun</string>
     <string>Subham</string>
+    <string>Suchi</string>
+    <string>Simran</string>
   </FirstName>
   <LastName>
-    <string>Mishra</string>
-    <string>Mishra</string>
-    <string>Dey</string>
-    <string>Kumar</string>
-    <string>Goswami</string>
-    <string>Mishra</string>
+    <string>Karmakar</string>
+    <string>Sahu</string>
+    <string>Kaur</string>
+    <string>Dasgupta</string>
   </LastName>
   <City>
-    <string />
-    <string />
-    <string>Kolkata</string>
-    <string>Patna</string>
-    <string>Kolkata</string>
     <string>Baripada</string>
+    <string>Balasore</string>
+    <string>Bubhaneswar</string>
+    <string>Durgapur</string>
   </City>
   <State>
-    <string />
-    <string />
-    <string>Wb</string>
-    <string>Bihar</string>
-    <string>WestBengal</string>
     <string>Odisha</string>
+    <string>Odisha</string>
+    <string>Odisha</string>
+    <string>WestBengal</string>
   </State>
   <ZipCode>
     <string>757001</string>
-    <string />
-    <string />
-    <string />
-    <string>234567</string>
-    <string>757001</string>
+    <string>757141</string>
+    <string>757652</string>
+    <string>812391</string>
   </ZipCode>
   <PhoneNumber>
-    <string />
-    <string />
-    <string />
-    <string />
-    <string>8761230923</string>
-    <string>7008411232</string>
+    <string>+91 2319804235</string>
+    <string>+91 0423521098</string>
+    <string>+91 6723500123</string>
+    <string>+91 9980176528</string>
   </PhoneNumber>
   <Email>
-    <string />
-    <string />
-    <string />
-    <string />
-    <string>sg@nit.go</string>
-    <string>jrm@gmail.org</string>
+    <string>karmakarb@mymail.com</string>
+    <string>sahu.subham@mymail.com</string>
+    <string>ksuchi01@mymail.com</string>
+    <string>dassimrangupta@mymail.com</string>
   </Email>
 </DictToListMapping>

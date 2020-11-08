@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
 using System.Text;
 
 namespace AddressBook.mapping
@@ -17,6 +18,10 @@ namespace AddressBook.mapping
         /// <summary>
         /// Path to JSON File
         /// </summary>
-        public static string JsonFilePath =  @"C:\Users\user\Desktop\Training-CapG\AddressBook\dataStorage\AddressBookList.json";   
+        public static string JsonFilePath =  @"C:\Users\user\Desktop\Training-CapG\AddressBook\dataStorage\AddressBookList.json";
+        /// <summary>
+        /// Connection string for AddressBook database
+        /// </summary>
+        public static string ConnectionString = @"Data Source=OCAC\SQK2K20JRM;Initial Catalog=addressbook_service;Integrated Security=True";
     }
 }

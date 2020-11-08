@@ -28,7 +28,10 @@
 
                 string userChoice = Console.ReadLine();
                 if(userChoice!="0")
+                {
                     AddressBookChoiceSwitch(ref addressBooksCollection, userChoice);
+                    contContactPanel = true;
+                }  
                 else
                 {
                     contAddressBook = false;
@@ -91,7 +94,8 @@
             {
                 //IoOperations.DeserializeAddressBooks(ref addressBooksCollection);
                 //CsvOperations.ReadFromCsv(ref addressBooksCollection);
-                JsonOperation.ReadFromJson(ref addressBooksCollection);
+                //JsonOperation.ReadFromJson(ref addressBooksCollection);
+                SqlServerOperation.ReadFromSqlServer(ref addressBooksCollection);
             }
             catch (Exception e)
             {
@@ -167,7 +171,7 @@
                 case "2":
                     break;
                 case "3":
-                   Console.WriteLine("Enter Name of the Address Book you want to switch");
+                    Console.WriteLine("Enter Name of the Address Book you want to switch");
                     addressBooksCollection.Name = Console.ReadLine();
                     break;
                 case "4":

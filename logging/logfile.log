@@ -12,3 +12,5 @@
 2020-10-25 18:01:23.1752 ERROR Input string was not in a correct format. It should be a integer
 2020-10-26 09:04:54.2563 DEBUG Class : Program , Method : Main, Field : choice
 2020-10-26 09:04:54.4646 ERROR Input string was not in a correct format. It should be a integer
+2020-10-30 09:32:43.3991 DEBUG Error in sorting section
+2020-10-30 09:32:48.0374 ERROR Input string was not in a correct format.

@@ -11,6 +11,7 @@
             Console.WriteLine("========================");
 
             ProgramStartUp.Start();
+            Console.ReadKey();
         }
     }
 }
