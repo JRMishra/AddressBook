@@ -117,6 +117,31 @@ namespace AddressBook.DBoperations
             return countByState;
         }
 
+        public static void AddContactDetail(string addressBookName, string contactName, ContactDetails contact)
+        {
+            using(SqlConnection connection = new SqlConnection(PathToFile.ConnectionString))
+            {
+                SqlCommand command = new SqlCommand();
+                command.CommandText = "insert into AddressBook values (@AddressBookName,@ContactName,@FirstName,@LastName," +
+                    "@City,@State,@Zip,@Phone,@Email,@DateAdded)";
+                command.Connection = connection;
+
+                command.Parameters.AddWithValue("@AddressBookName", addressBookName);
+                command.Parameters.AddWithValue("@ContactName", contactName);
+                command.Parameters.AddWithValue("@FirstName", contact.FirstName);
+                command.Parameters.AddWithValue("@LastName", contact.LastName);
+                command.Parameters.AddWithValue("@City", contact.City);
+                command.Parameters.AddWithValue("@State", contact.State);
+                command.Parameters.AddWithValue("@Zip", contact.Zip);
+                command.Parameters.AddWithValue("@Phone", contact.PhoneNumber);
+                command.Parameters.AddWithValue("@Email", contact.Email);
+                command.Parameters.AddWithValue("@DateAdded", contact.DateAdded);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+        
         //-----------------------[ Private Methods ]------------------------------//
         private static void DeleteAllRows()
         {

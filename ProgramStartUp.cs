@@ -81,6 +81,7 @@
             {
                 Console.WriteLine(item.Key+"\t"+item.Value);
             }
+            Console.WriteLine();
             //3
             Dictionary<string, int> countByState = SqlServerOperation.CountByState();
             Console.WriteLine("State\tCount");
@@ -88,6 +89,11 @@
             {
                 Console.WriteLine(item.Key + "\t" + item.Value);
             }
+            Console.WriteLine();
+            //4
+            //ContactDetails contact = new ContactDetails("Shyam", "Kumar", "Barauni", "Patna", "710923", "9309165207", "kshyam@mymail.com");
+            //SqlServerOperation.AddContactDetail("College", "ShyamBmep", contact);
+            
         }
         //----------------------------------- [ Private Methods ]----------------------------------------//
         /// <summary>
