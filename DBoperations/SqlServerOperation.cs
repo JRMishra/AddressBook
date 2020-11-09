@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data.SqlClient;
 using System.Data;
+using System.Linq;
 
 namespace AddressBook.DBoperations
 {
@@ -30,6 +31,7 @@ namespace AddressBook.DBoperations
                     dictToList.ZipCode.Add(dataReader["Zip"].ToString());
                     dictToList.PhoneNumber.Add(dataReader["Phone"].ToString());
                     dictToList.Email.Add(dataReader["Email"].ToString());
+                    dictToList.DateAdded.Add((DateTime)dataReader["DateAdded"]);
                 }
             }
             addressBooks = DictToListMapping.ListToDictionary(dictToList);
@@ -70,7 +72,7 @@ namespace AddressBook.DBoperations
                 row[6] = dictToList.ZipCode[i];
                 row[7] = dictToList.PhoneNumber[i];
                 row[8] = dictToList.Email[i];
-                row[9] = DateTime.Today;
+                row[9] = dictToList.DateAdded[i];
 
                 dataSet.Tables["AddressBook"].Rows.Add(row);
             }
@@ -87,7 +89,18 @@ namespace AddressBook.DBoperations
 
         }
 
-        public static void DeleteAllRows()
+        public static List<DataRow> ContactsAddedBetweenDateRange(DateTime start, DateTime end)
+        {
+            DataSet dataSet = RetrieveDataFromTable();
+            var contactsAddedInBetween = from data in dataSet.Tables["AddressBook"].AsEnumerable()
+                                         where data.Field<DateTime>("DateAdded") >= start
+                                         && data.Field<DateTime>("DateAdded") <= end
+                                         select data;
+            return contactsAddedInBetween.ToList();
+        }
+
+        //-----------------------[ Private Methods ]------------------------------//
+        private static void DeleteAllRows()
         {
             using (SqlConnection connection = new SqlConnection(path))
             {
@@ -95,6 +108,19 @@ namespace AddressBook.DBoperations
                 connection.Open();
                 command.ExecuteNonQuery();
             }
+        }
+
+        private static DataSet RetrieveDataFromTable()
+        {
+            DataSet dataSet = new DataSet();
+            using (SqlConnection connection = new SqlConnection(path))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("select * from AddressBook", connection);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
+                dataAdapter.Fill(dataSet, "AddressBook");
+            }
+            return dataSet;
         }
     }
 }

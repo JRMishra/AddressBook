@@ -334,6 +334,7 @@
             contact.Zip = TakeUserInput("Zip");
             contact.PhoneNumber = TakeUserInput("PhoneNumber");
             contact.Email = TakeUserInput("Email");
+            contact.DateAdded = DateTime.Today;
             Console.WriteLine();
 
             int i = 1;

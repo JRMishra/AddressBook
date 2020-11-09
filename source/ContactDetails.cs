@@ -1,6 +1,7 @@
 ﻿namespace AddressBook
 {
     using System;
+    using System.Data;
 
     public class ContactDetails
     {
@@ -11,6 +12,7 @@
         string _zip;
         string _phNo;
         string _email;
+        DateTime _dateAdded;
 
         public ContactDetails()
         {
@@ -32,6 +34,7 @@
             this._zip = Zip;
             this._phNo = PhoneNumber;
             this._email = Email;
+            this._dateAdded = DateTime.Today;
         }
 
         public string FirstName { get => _firstName; set => _firstName = value; }
@@ -41,6 +44,7 @@
         public string City { get=>_city; set=>_city=value; }
         public string State { get => _state; set => _state = value; }
         public string Zip { get => _zip; set => _zip = value; }
+        public DateTime DateAdded { get => _dateAdded; set => _dateAdded = value; }
 
         /// <summary>
         /// </summary>

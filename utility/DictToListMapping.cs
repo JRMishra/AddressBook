@@ -23,6 +23,7 @@ namespace AddressBook
             ZipCode = new List<string>();
             PhoneNumber = new List<string>();
             Email = new List<string>();
+            DateAdded = new List<DateTime>();
         }
 
         ///Copy constructer
@@ -48,6 +49,7 @@ namespace AddressBook
         public List<string> ZipCode { get; set; }
         public List<string> PhoneNumber { get; set; }
         public List<string> Email { get; set; }
+        public List<DateTime> DateAdded { get; set; }
 
         /// <summary>
         /// Method to map addressbooks dictionary to this class lists
@@ -73,6 +75,7 @@ namespace AddressBook
                     dictToList.ZipCode.Add(contact.Value.Zip);
                     dictToList.PhoneNumber.Add(contact.Value.PhoneNumber);
                     dictToList.Email.Add(contact.Value.Email);
+                    dictToList.DateAdded.Add(contact.Value.DateAdded);
                 }
             }
             return dictToList;
@@ -104,6 +107,7 @@ namespace AddressBook
                 contactDetails.Zip = dictToList.ZipCode[i];
                 contactDetails.PhoneNumber = dictToList.PhoneNumber[i];
                 contactDetails.Email = dictToList.Email[i];
+                contactDetails.DateAdded = dictToList.DateAdded[i];
 
                 if (addressBooks._multiAddressBooks.ContainsKey(addressBookName))
                     addressBooks._multiAddressBooks[addressBookName].AddressBook.Add(contactName, contactDetails);
