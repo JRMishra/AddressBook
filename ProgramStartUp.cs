@@ -59,6 +59,7 @@
             } while (contAddressBook);
 
             FileWritingOperation(addressBooksCollection);
+            Console.WriteLine("Saved changes to database");
         }
 
         //----------------------------------- [ Private Methods ]----------------------------------------//
@@ -71,13 +72,14 @@
             LogDetails logDetails = new LogDetails();
             try
             {
-                IoOperations.SerializeAddressBooks(addressBooksCollection);
-                CsvOperations.WriteToCsv(addressBooksCollection);
-                JsonOperation.WriteToJson(addressBooksCollection);
+                //IoOperations.SerializeAddressBooks(addressBooksCollection);
+                //CsvOperations.WriteToCsv(addressBooksCollection);
+                //JsonOperation.WriteToJson(addressBooksCollection);
                 SqlServerOperation.WriteToSqlServer(addressBooksCollection);
             }
             catch (Exception e)
             {
+                Console.WriteLine("In catch block : "+e.Message);
                 logDetails.LogDebug("IO Error in Writing operation");
                 logDetails.LogError(e.Message);
             }

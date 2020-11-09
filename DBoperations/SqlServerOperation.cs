@@ -14,12 +14,12 @@ namespace AddressBook.DBoperations
         public static void ReadFromSqlServer(ref AddressBooks addressBooks)
         {
             DictToListMapping dictToList = new DictToListMapping();
-            using(SqlConnection connection = new SqlConnection(path))
+            using (SqlConnection connection = new SqlConnection(path))
             {
                 SqlCommand command = new SqlCommand("select * from AddressBook", connection);
                 connection.Open();
                 SqlDataReader dataReader = command.ExecuteReader();
-                while(dataReader.Read())
+                while (dataReader.Read())
                 {
                     dictToList.AddressBookName.Add(dataReader["AddressBookName"].ToString());
                     dictToList.ContactName.Add(dataReader["ContactName"].ToString());
@@ -37,34 +37,64 @@ namespace AddressBook.DBoperations
 
         public static void WriteToSqlServer(AddressBooks addressBooks)
         {
+            DeleteAllRows();
+
             DictToListMapping dictToList = new DictToListMapping(DictToListMapping.DictionaryToList(addressBooks));
-
+           
             DataSet dataSet = new DataSet();
-            dataSet.Tables[0].Columns.Add("AddressBookName");
-            dataSet.Tables[0].Columns.Add("ContactName");
-            dataSet.Tables[0].Columns.Add("FirstName");
-            dataSet.Tables[0].Columns.Add("LastName");
-            dataSet.Tables[0].Columns.Add("City");
-            dataSet.Tables[0].Columns.Add("State");
-            dataSet.Tables[0].Columns.Add("Zip");
-            dataSet.Tables[0].Columns.Add("Phone");
-            dataSet.Tables[0].Columns.Add("Email");
+            DataTable dataTable = new DataTable("AddressBook");
 
+            dataTable.Columns.Add("AddressBookName", typeof(string));
+            dataTable.Columns.Add("ContactName", typeof(string));
+            dataTable.Columns.Add("FirstName", typeof(string));
+            dataTable.Columns.Add("LastName", typeof(string));
+            dataTable.Columns.Add("City", typeof(string));
+            dataTable.Columns.Add("State", typeof(string));
+            dataTable.Columns.Add("Zip", typeof(string));
+            dataTable.Columns.Add("Phone", typeof(string));
+            dataTable.Columns.Add("Email", typeof(string));
+            dataTable.Columns.Add("DateAdded", typeof(DateTime));
+
+            dataSet.Tables.Add(dataTable);
+            dataSet.Tables[0].TableName = "AddressBook";
             for (int i = 0; i < dictToList.AddressBookName.Count; i++)
             {
-                dataSet.Tables[0].Rows.Add(dictToList.AddressBookName[i]);
-                dataSet.Tables[0].Rows.Add(dictToList.ContactName[i]);
-                dataSet.Tables[0].Rows.Add(dictToList.FirstName[i]);
-                dataSet.Tables[0].Rows.Add(dictToList.LastName[i]);
-                dataSet.Tables[0].Rows.Add(dictToList.City[i]);
-                dataSet.Tables[0].Rows.Add(dictToList.State[i]);
-                dataSet.Tables[0].Rows.Add(dictToList.ZipCode[i]);
-                dataSet.Tables[0].Rows.Add(dictToList.PhoneNumber[i]);
-                dataSet.Tables[0].Rows.Add(dictToList.Email[i]);
+                DataRow row = dataSet.Tables[0].NewRow();
+
+                row[0] = dictToList.AddressBookName[i];
+                row[1] = dictToList.ContactName[i];
+                row[2] = dictToList.FirstName[i];
+                row[3] = dictToList.LastName[i];
+                row[4] = dictToList.City[i];
+                row[5] = dictToList.State[i];
+                row[6] = dictToList.ZipCode[i];
+                row[7] = dictToList.PhoneNumber[i];
+                row[8] = dictToList.Email[i];
+                row[9] = DateTime.Today;
+
+                dataSet.Tables["AddressBook"].Rows.Add(row);
             }
 
-            SqlDataAdapter dataAdapter = new SqlDataAdapter();
-            dataAdapter.Update(dataSet);
+            using (SqlConnection connection = new SqlConnection(path))
+            {
+                connection.Open();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter("select * from AddressBook", connection);
+
+                SqlCommandBuilder builder = new SqlCommandBuilder(dataAdapter);
+                int rowsUpdated = dataAdapter.Update(dataSet, "AddressBook");
+                Console.WriteLine("Rows Affected " + rowsUpdated);
+            }
+
+        }
+
+        public static void DeleteAllRows()
+        {
+            using (SqlConnection connection = new SqlConnection(path))
+            {
+                SqlCommand command = new SqlCommand("delete from AddressBook", connection);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
         }
     }
-} 
+}
