@@ -2,6 +2,8 @@
 {
     using AddressBook.DBoperations;
     using System;
+    using System.Collections.Generic;
+    using System.Data;
 
     class ProgramStartUp
     {
@@ -62,6 +64,31 @@
             Console.WriteLine("Saved changes to database");
         }
 
+        public static void LinqOperations()
+        {
+            //1
+            List<DataRow> data = SqlServerOperation.ContactsAddedBetweenDateRange(new DateTime(2020, 11, 01), DateTime.Today);
+            Console.WriteLine("Contacts added between 01/11/2020 and Today ");
+            foreach (DataRow row in data)
+            {
+                Console.WriteLine(row.Field<string>("ContactName"));
+            }
+            Console.WriteLine();
+            //2
+            Dictionary<string,int> countByCity = SqlServerOperation.CountByCity();
+            Console.WriteLine("City\tCount");
+            foreach(var item in countByCity)
+            {
+                Console.WriteLine(item.Key+"\t"+item.Value);
+            }
+            //3
+            Dictionary<string, int> countByState = SqlServerOperation.CountByState();
+            Console.WriteLine("State\tCount");
+            foreach (var item in countByState)
+            {
+                Console.WriteLine(item.Key + "\t" + item.Value);
+            }
+        }
         //----------------------------------- [ Private Methods ]----------------------------------------//
         /// <summary>
         /// Write contact details of all address books in XML, CSV & JSON file

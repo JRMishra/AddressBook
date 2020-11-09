@@ -99,6 +99,24 @@ namespace AddressBook.DBoperations
             return contactsAddedInBetween.ToList();
         }
 
+        public static Dictionary<string,int> CountByCity()
+        {
+            DataSet dataSet = RetrieveDataFromTable();
+            var countByCity = (from data in dataSet.Tables["AddressBook"].AsEnumerable()
+                                          group data by data.Field<string>("City"))
+                                         .ToDictionary(dataGrp => dataGrp.Key, dataGrp => dataGrp.Count());
+            return countByCity;
+        }
+
+        public static Dictionary<string, int> CountByState()
+        {
+            DataSet dataSet = RetrieveDataFromTable();
+            var countByState = (from data in dataSet.Tables["AddressBook"].AsEnumerable()
+                               group data by data.Field<string>("State"))
+                                         .ToDictionary(dataGrp => dataGrp.Key, dataGrp => dataGrp.Count());
+            return countByState;
+        }
+
         //-----------------------[ Private Methods ]------------------------------//
         private static void DeleteAllRows()
         {

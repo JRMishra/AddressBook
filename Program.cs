@@ -14,12 +14,8 @@
             Console.WriteLine("========================");
 
             //ProgramStartUp.Start();
-            List<DataRow> data = SqlServerOperation.ContactsAddedBetweenDateRange(new DateTime(2020, 10, 01), DateTime.Today);
-            foreach(DataRow row in data)
-            {
-                Console.WriteLine(row.Field<string>("ContactName"));
-            }
-            //Console.ReadKey();
+            ProgramStartUp.LinqOperations();
+            Console.ReadKey();
         }
     }
 }
