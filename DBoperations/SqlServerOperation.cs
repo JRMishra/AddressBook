@@ -5,6 +5,8 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Data;
 using System.Linq;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace AddressBook.DBoperations
 {
@@ -142,6 +144,14 @@ namespace AddressBook.DBoperations
             }
         }
         
+        public static void WriteFromSqlServerToJson()
+        {
+            DataSet dataSet = RetrieveDataFromTable();
+
+            string jsonData = JsonConvert.SerializeObject(dataSet);
+            File.WriteAllText(PathToFile.LinqToJsonFilePath, jsonData);
+        }
+
         //-----------------------[ Private Methods ]------------------------------//
         private static void DeleteAllRows()
         {

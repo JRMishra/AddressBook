@@ -93,7 +93,9 @@
             //4
             //ContactDetails contact = new ContactDetails("Shyam", "Kumar", "Barauni", "Patna", "710923", "9309165207", "kshyam@mymail.com");
             //SqlServerOperation.AddContactDetail("College", "ShyamBmep", contact);
-            
+
+            //5
+            SqlServerOperation.WriteFromSqlServerToJson();
         }
         //----------------------------------- [ Private Methods ]----------------------------------------//
         /// <summary>
