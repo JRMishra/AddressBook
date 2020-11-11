@@ -13,8 +13,8 @@
             Console.WriteLine("Welcome to Address Book");
             Console.WriteLine("========================");
 
-            //ProgramStartUp.Start();
-            ProgramStartUp.LinqOperations();
+            ProgramStartUp.Start();
+            //ProgramStartUp.LinqOperations();
             Console.ReadKey();
         }
     }

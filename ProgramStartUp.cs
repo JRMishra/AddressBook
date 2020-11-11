@@ -4,6 +4,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Threading.Tasks;
 
     class ProgramStartUp
     {
@@ -14,7 +15,13 @@
         {
             AddressBooks addressBooksCollection = new AddressBooks();
 
-            FileReadingOperation(ref addressBooksCollection);
+            //FileReadingOperation(ref addressBooksCollection);
+            Task readingTask = new Task(() =>
+            {
+                FileReadingOperation(ref addressBooksCollection);
+            });
+            readingTask.Start();
+            readingTask.Wait();
 
             addressBooksCollection.Name = "General";
             bool contAddressBook = true; ;
@@ -60,7 +67,13 @@
 
             } while (contAddressBook);
 
-            FileWritingOperation(addressBooksCollection);
+            //FileWritingOperation(addressBooksCollection);
+            Task writingTask = new Task(() =>
+            {
+                FileWritingOperation(addressBooksCollection);
+            });
+            writingTask.Start();
+            writingTask.Wait();
             Console.WriteLine("Saved changes to database");
         }
 

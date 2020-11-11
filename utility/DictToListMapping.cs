@@ -38,6 +38,7 @@ namespace AddressBook
             ZipCode = dictToList.ZipCode;
             PhoneNumber = dictToList.PhoneNumber;
             Email = dictToList.Email;
+            DateAdded = dictToList.DateAdded;
         }
 
         public List<string> AddressBookName { get; set; }
