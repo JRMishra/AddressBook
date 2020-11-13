@@ -38,8 +38,8 @@
                 string userChoice = Console.ReadLine();
                 if(userChoice!="0")
                 {
-                    AddressBookChoiceSwitch(ref addressBooksCollection, userChoice);
-                    contContactPanel = true;
+                    contContactPanel = false;
+                    AddressBookChoiceSwitch(ref addressBooksCollection, userChoice, ref contContactPanel);
                 }  
                 else
                 {
@@ -211,19 +211,27 @@
         /// </summary>
         /// <param name="addressBooksCollection">ref to all address books</param>
         /// <param name="userChoice">User input to choose operation among available options</param>
-        private static void AddressBookChoiceSwitch(ref AddressBooks addressBooksCollection, string userChoice)
+        private static void AddressBookChoiceSwitch(ref AddressBooks addressBooksCollection, string userChoice, ref bool contContactPanel)
         {
             switch (userChoice)
             {
                 case "1":
                     Console.WriteLine("Add Name of the new Address Book");
                     addressBooksCollection.Name = Console.ReadLine();
+                    contContactPanel = true;
                     break;
                 case "2":
+                    contContactPanel = true;
                     break;
                 case "3":
-                    Console.WriteLine("Enter Name of the Address Book you want to switch");
+                    Console.WriteLine("Available books : ");
+                    foreach(var item in addressBooksCollection._multiAddressBooks)
+                    {
+                        Console.Write(item.Key+" , ");
+                    }
+                    Console.WriteLine("\nEnter Name of the Address Book you want to switch");
                     addressBooksCollection.Name = Console.ReadLine();
+                    contContactPanel = true;
                     break;
                 case "4":
                     Console.WriteLine("Enter\n" +

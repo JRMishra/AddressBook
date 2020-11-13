@@ -10,7 +10,7 @@ using System.IO;
 
 namespace AddressBook.DBoperations
 {
-    class SqlServerOperation
+    public class SqlServerOperation
     {
         static string path = PathToFile.ConnectionString;
 
