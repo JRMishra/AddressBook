@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using AddressBook.Interfaces;
 
 namespace AddressBook.DBoperations
 {
-    class JsonOperation
+    public class JsonOperation : IDataSourceOperation
     {
         static string path = PathToFile.JsonFilePath;
 
@@ -35,6 +36,19 @@ namespace AddressBook.DBoperations
             dictToList = JsonConvert.DeserializeObject<DictToListMapping>(jsonData);
 
             addressBooks = DictToListMapping.ListToDictionary(dictToList);
+        }
+
+        public DictToListMapping ReadFromDataSource()
+        {
+            DictToListMapping dictToList = new DictToListMapping();
+            string jsonData = File.ReadAllText(path);
+            dictToList = JsonConvert.DeserializeObject<DictToListMapping>(jsonData);
+            return dictToList;
+        }
+
+        public bool WriteToDataSource(DictToListMapping dictToList)
+        {
+            throw new NotImplementedException();
         }
     }
 }

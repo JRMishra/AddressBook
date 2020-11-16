@@ -7,18 +7,19 @@ namespace AddressBook.mapping
 {
     class PathToFile
     {
+        public static string rootPath = @"C:\Users\user\Desktop\Training-CapG\AddressBook\AddressBookProgram\";
         /// <summary>
         /// Path to XML File
         /// </summary>
-        public static string XmlFilePath =  @"C:\Users\user\Desktop\Training-CapG\AddressBook\dataStorage\AddressBookList.xml";
+        public static string XmlFilePath =  rootPath+@"dataStorage\AddressBookList.xml";
         /// <summary>
         /// Path to CSV File
         /// </summary>
-        public static string CsvFilePath =  @"C:\Users\user\Desktop\Training-CapG\AddressBook\dataStorage\AddressBookList.csv";
+        public static string CsvFilePath = rootPath+ @"dataStorage\AddressBookList.csv";
         /// <summary>
         /// Path to JSON File
         /// </summary>
-        public static string JsonFilePath =  @"C:\Users\user\Desktop\Training-CapG\AddressBook\dataStorage\AddressBookList.json";
+        public static string JsonFilePath = rootPath+ @"dataStorage\AddressBookList.json";
         /// <summary>
         /// Connection string for AddressBook database
         /// </summary>
@@ -26,6 +27,6 @@ namespace AddressBook.mapping
         /// <summary>
         /// Path to JSON File created from Sql Server Db
         /// </summary>
-        public static string LinqToJsonFilePath = @"C:\Users\user\Desktop\Training-CapG\AddressBook\dataStorage\AddressBookTableLinq.json";
+        public static string LinqToJsonFilePath = rootPath+ @"dataStorage\AddressBookTableLinq.json";
     }
 }

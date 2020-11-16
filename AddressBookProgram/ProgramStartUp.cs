@@ -1,5 +1,6 @@
 ﻿namespace AddressBook.source
 {
+    using AddressBook.DataAdapter;
     using AddressBook.DBoperations;
     using System;
     using System.Collections.Generic;
@@ -16,12 +17,15 @@
             AddressBooks addressBooksCollection = new AddressBooks();
 
             //FileReadingOperation(ref addressBooksCollection);
-            Task readingTask = new Task(() =>
-            {
-                FileReadingOperation(ref addressBooksCollection);
-            });
-            readingTask.Start();
-            readingTask.Wait();
+            //Task readingTask = new Task(() =>
+            //{
+            //    FileReadingOperation(ref addressBooksCollection);
+            //});
+            //readingTask.Start();
+            //readingTask.Wait();
+
+            AddressBookDataAdapter adapter = new AddressBookDataAdapter();
+            adapter.Reader(AddressBookDataAdapter.OperationType.JSON, ref addressBooksCollection);
 
             addressBooksCollection.Name = "General";
             bool contAddressBook = true; ;
@@ -122,8 +126,8 @@
             {
                 //IoOperations.SerializeAddressBooks(addressBooksCollection);
                 //CsvOperations.WriteToCsv(addressBooksCollection);
-                //JsonOperation.WriteToJson(addressBooksCollection);
-                SqlServerOperation.WriteToSqlServer(addressBooksCollection);
+                JsonOperation.WriteToJson(addressBooksCollection);
+                //SqlServerOperation.WriteToSqlServer(addressBooksCollection);
             }
             catch (Exception e)
             {
